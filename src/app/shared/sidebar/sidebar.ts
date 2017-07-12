@@ -43,6 +43,7 @@ export class SidebarComponent {
       data => {
         this.orgmenus = data;
         for (let menu of this.orgmenus) {
+        console.log('Working...');
           if (menu.parentmenu == 0) {
             menu.navitems = [];
             for (let item of this.orgmenus) {
