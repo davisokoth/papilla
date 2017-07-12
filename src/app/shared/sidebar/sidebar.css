@@ -1,5 +1,8 @@
-.collapse {
-  height: 0px;
-  overflow: hidden;
-  transition: height 0.5s;
+.navitem {
+   padding: 5px;
+   text-decoration: none;
+   font-size: 15px;
+   color: #ffffff;
+   display: block;
+   cursor: pointer;
 }

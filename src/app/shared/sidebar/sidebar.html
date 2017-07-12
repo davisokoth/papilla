@@ -1,23 +1,15 @@
 <button class="btn btn-default" id="toggle-sidebar" type="button"
-	(click)="eventCalled()">&#9776;</button>
+	(click)="eventCalled()">&#9776; Yoyo</button>
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
 	<ul class="list-group">
-		<a routerLink="/dashboard/home"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-fw fa-dashboard"></i> Dashboard
-		</a>
-		<a [routerLink]="['chart']"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-fw fa-bar-chart-o"></i> Charts
-		</a>
-		<div class="nested-menu" *ngFor="let menu of menus">
-			<a class="list-group-item" data-toggle="collapse" data-target="#{{menu.url}}"> 
-				<span><i class="fa fa-plus"></i> &nbsp; {{menu.name}}</span>
+		<div *ngFor="let menu of menus">
+			<a class="navitem" href="#" data-toggle="collapse" [attr.data-target]="'#menu-' + menu.c_menu_id"> 
+				<i class="fa fa-plus"></i> &nbsp; {{menu.name}}
 			</a>
-			<div id="{{menu.url}}" class="collapse">
+			<div id="menu-{{menu.c_menu_id}}" class="collapse">
 				<ul class="submenu">
 					<li *ngFor="let menuitem of menu.navitems">
-						<a routerLink="['${menu.action']" [routerLinkActive]="['router-link-active']">
+						<a class="navitem" routerLink="['${menu.action']" [routerLinkActive]="['router-link-active']">
 							<i class="fa fa-fw fa-{{menuitem.icon}}"></i> &nbsp; {{menuitem.name}}
 						</a>
 					</li>
@@ -25,61 +17,5 @@
 			</div>
 			
 		</div>
-		<!-- 
-		<li >
-			<div *ngIf="menu.parentmenu == 0">
-				<a routerLink="['${menu.action']" class="list-group-item">
-					<i class="fa fa-fw fa-{{menu.icon}}"></i> {{menu.name}}
-				</a>
-				<li *ngFor="let menuitem of menu.navitems">
-					<div *ngIf="menu.parentmenu == 0">
-						<a routerLink="['${menu.action']"
-							[routerLinkActive]="['router-link-active']" class="list-group-item">
-							<i class="fa fa-fw fa-{{menu.icon}}"></i> {{menu.name}}
-						</a>
-					</div>
-				</li>
-			</div>
-		</li>
-		 -->
-		<!-- 
-		<a [routerLink]="['tables']"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-fw fa-table"></i> Tables
-		</a>
-		<a [routerLink]="['forms']"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-fw fa-edit"></i> Forms
-		</a>
-		<a [routerLink]="['element']"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-fw fa-desktop"></i> Bootstrap Elements
-		</a>
-		<a [routerLink]="['grid']" [routerLinkActive]="['router-link-active']"
-			class="list-group-item"> <i class="fa fa-fw fa-wrench"></i>
-			Bootstrap Grid
-		</a>
-		<a [routerLink]="['components']"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-th-list"></i> &nbsp;Component
-		</a>
-		<div class="nested-menu">
-			<a class="list-group-item" (click)="addExpandClass('pages')"> <span><i
-					class="fa fa-plus"></i> &nbsp; Menu</span>
-			</a>
-			<li class="nested" [ngClass]="{'expand' : showMenu === 'pages' }">
-				<ul class="submenu">
-					<li><a href=""><span>Submenu</span></a></li>
-					<li><a href=""><span>Submenu</span></a></li>
-				</ul>
-			</li>
-		</div>
-		<a [routerLink]="['blankpage']"
-			[routerLinkActive]="['router-link-active']" class="list-group-item">
-			<i class="fa fa-file-o"></i> &nbsp;BlankPage
-		</a>
-		<a class="list-group-item more-themes" href="http://www.strapui.com/">
-			More Themes </a>
-		 -->
 	</ul>
 </nav>
