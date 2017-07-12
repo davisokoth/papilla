@@ -10,15 +10,38 @@
 			[routerLinkActive]="['router-link-active']" class="list-group-item">
 			<i class="fa fa-fw fa-bar-chart-o"></i> Charts
 		</a>
-		<li *ngFor="let menu of menus">
-			<div *ngIf="menu.parentmenu === 0">
-				{{menu.parentmenu}}
-				<a routerLink="['${menu.action']"
-					[routerLinkActive]="['router-link-active']" class="list-group-item">
+		<div class="nested-menu" *ngFor="let menu of menus">
+			<a class="list-group-item" data-toggle="collapse" data-target="#{{menu.url}}"> 
+				<span><i class="fa fa-plus"></i> &nbsp; {{menu.name}}</span>
+			</a>
+			<div id="{{menu.url}}" class="collapse">
+				<ul class="submenu">
+					<li *ngFor="let menuitem of menu.navitems">
+						<a routerLink="['${menu.action']" [routerLinkActive]="['router-link-active']">
+							<i class="fa fa-fw fa-{{menuitem.icon}}"></i> &nbsp; {{menuitem.name}}
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<!-- 
+		<li >
+			<div *ngIf="menu.parentmenu == 0">
+				<a routerLink="['${menu.action']" class="list-group-item">
 					<i class="fa fa-fw fa-{{menu.icon}}"></i> {{menu.name}}
 				</a>
+				<li *ngFor="let menuitem of menu.navitems">
+					<div *ngIf="menu.parentmenu == 0">
+						<a routerLink="['${menu.action']"
+							[routerLinkActive]="['router-link-active']" class="list-group-item">
+							<i class="fa fa-fw fa-{{menu.icon}}"></i> {{menu.name}}
+						</a>
+					</div>
+				</li>
 			</div>
 		</li>
+		 -->
 		<!-- 
 		<a [routerLink]="['tables']"
 			[routerLinkActive]="['router-link-active']" class="list-group-item">

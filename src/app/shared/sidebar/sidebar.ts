@@ -41,10 +41,16 @@ export class SidebarComponent {
   getMenus() {
     this.menuService.getMenus().subscribe(
       data => {
-        this.menus = data;
-        for (let menu of this.menus) {
+        this.orgmenus = data;
+        for (let menu of this.orgmenus) {
           if (menu.parentmenu == 0) {
-            console.log(menu);
+            menu.navitems = [];
+            for (let item of this.orgmenus) {
+              if (item.parentmenu === menu.c_menu_id) {
+                menu.navitems.push(item);
+              }
+            }
+            this.menus.push(menu);
           }
         }
       },
