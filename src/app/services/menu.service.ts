@@ -14,7 +14,7 @@ export class MenuService {
   constructor(private http: Http) {}
 
   getMenus(): Observable<MenuModel[]> {
-    console.log(`${this.url}c_menus`);
+    console.log(`${this.url}c_menus?filter[order]=sequence`);
     const menus$ = this.http
       .get(`${this.url}c_menus`)
       .map(response => response.json());
