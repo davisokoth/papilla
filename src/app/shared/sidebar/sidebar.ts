@@ -6,7 +6,8 @@ import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-sidebar-cmp',
-  templateUrl: 'sidebar.html'
+  templateUrl: 'sidebar.html',
+  styleUrls: [ 'sidebar.css' ]
 })
 
 export class SidebarComponent {
