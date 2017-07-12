@@ -1,18 +1,30 @@
 <div [formGroup]="form">
-  <!-- <label [attr.for]="question.key">{{question.label}}</label> -->
-
-  <div [ngSwitch]="question.controlType" class="inputgroup">
-
-    <input pInputText *ngSwitchCase="'email'" [formControlName]="question.key"
-        [id]="question.key" [type]="question.type" [placeholder]="question.label">
-
-    <p-dropdown *ngSwitchCase="'dropdown'" [options]="question.options" 
-        [placeholder]="question.label" filter="filter">
-    </p-dropdown>
-
-    <input pInputText *ngSwitchCase="'textbox'" [formControlName]="question.key"
-              [id]="question.key" [type]="question.type" [placeholder]="question.label">
-
-  </div> 
-  <!-- <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div> -->
+	<!-- <label [attr.for]="question.key">{{question.label}}</label> -->
+	
+	<div [ngSwitch]="question.type" class="inputgroup">
+	
+	  <input *ngSwitchCase="'email'" [formControlName]="question.key"
+	      [id]="question.key" [type]="email" [placeholder]="question.label">
+	
+	  <input *ngSwitchCase="'text'" [formControlName]="question.key"
+	      [id]="question.key" [type]="question.type" [placeholder]="question.label">
+	
+	  <input *ngSwitchCase="'autocomplete'" [formControlName]="question.key"
+	      [id]="question.key" [type]="text" [placeholder]="question.label">
+	
+	  <input *ngSwitchCase="'number'" [formControlName]="question.key"
+	      [id]="question.key" [type]="number" [placeholder]="question.label">
+	
+	  <input *ngSwitchCase="'date'" [formControlName]="question.key"
+	      [id]="question.key" [type]="date" [placeholder]="question.label">
+	
+	  <select *ngSwitchCase="'select'">
+	  	<option *ngFor="let option of question.options" value="option.value">{{option.name}}</option>
+	  </select>
+	
+	  <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
+	            [id]="question.key" [type]="question.type" [placeholder]="question.label">
+	
+	</div> 
+	<!-- <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div> -->
 </div>

@@ -12,7 +12,9 @@ import { QuestionControlService }    from '../services/question-control.service'
 })
 export class DynaformComponent implements OnInit {
 
-  @Input() questions: QuestionBase<any>[] = [];
+  @Input()
+  questions: QuestionBase [] = [];
+
   form: FormGroup;
   payLoad = '';
 
@@ -20,10 +22,13 @@ export class DynaformComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions);
+    // console.log(this.questions);
   }
 
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
   }
+
+  trackByIndex() {}
 
 }

@@ -36,29 +36,9 @@ export class AppComponent {
         if (!this.isLoggedIn) {
           console.log('Not logged in');
           this.router.navigate(['/login']);
-        } else {
-          this.doLoading();
         }
-      } else {
-        this.doLoading();
       }
     });
-  }
-
-  doLoading() {
-    this.user = localStorage.getItem('user');
-    this.name = localStorage.getItem('name');
-    console.log(this.user);
-  }
-
-  getFacilityDetails() {
-    this.menuService.getMenus().subscribe(
-      data => {
-        this.menus = data;
-        console.log(data);
-      },
-      err => { this.error = true; }
-    );
   }
 
   ngOnDestroy() {
@@ -67,7 +47,4 @@ export class AppComponent {
 
   ngOnInit() {}
 
-  launchAsset(menu: MenuModel) {
-    this.router.navigate([`/dynamic/${menu.c_form_id}`]);
-  }
 }

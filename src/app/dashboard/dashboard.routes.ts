@@ -8,6 +8,7 @@ import { FormRoutes } from './forms/forms.routes';
 import { GridRoutes } from './grid/grid.routes';
 import { BSComponentRoutes } from './bs-component/bsComponent.routes';
 import { BSElementRoutes } from './bs-element/bsElement.routes';
+import { DynamicRoutes } from '../dynamic/dynamic.routes';
 
 import { DashboardComponent } from './index';
 
@@ -23,7 +24,8 @@ export const DashboardRoutes: Route[] = [
         ...BlankPageRoutes,
         ...FormRoutes,
         ...GridRoutes,
-        ...BSElementRoutes
+        ...BSElementRoutes,
+        ...DynamicRoutes
       ]
     }
 ];

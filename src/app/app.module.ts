@@ -8,9 +8,9 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { LoginModule } from './login/login.module';
+import { DynamicModule } from './dynamic/dynamic.module';
 import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-
 import { MenuService } from './services/menu.service';
 
 @NgModule({
@@ -19,6 +19,7 @@ import { MenuService } from './services/menu.service';
   ],
   imports: [
     BrowserModule,
+    DynamicModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
