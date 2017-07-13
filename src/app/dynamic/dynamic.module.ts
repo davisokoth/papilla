@@ -10,12 +10,13 @@ import { LoggedService } from '../services/logged.service';
 import { DynamicComponent } from './dynamic.component';
 import { DynaformComponent } from '../dynaform/dynaform.component';
 import { FormElementComponent } from '../form-element/form-element.component';
+import { ConsultationComponent } from '../consultation/consultation.component';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
     providers: [ FormService, QuestionControlService, QuestionService, LoggedService ],
-    declarations: [DynamicComponent, DynaformComponent, FormElementComponent],
-    exports: [DynamicComponent, DynaformComponent, FormElementComponent]
+    declarations: [DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent],
+    exports: [DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent]
 })
 
 export class DynamicModule { }
