@@ -6,3 +6,9 @@
    display: block;
    cursor: pointer;
 }
+
+.submenu {
+	list-style: none;
+	-webkit-padding-start: 10px;
+	font-size: -2px;
+}

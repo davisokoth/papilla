@@ -9,7 +9,7 @@
 			<div id="menu-{{menu.c_menu_id}}" class="collapse">
 				<ul class="submenu">
 					<li *ngFor="let menuitem of menu.navitems">
-						<a class="navitem" routerLink="['${menu.action']" [routerLinkActive]="['router-link-active']">
+						<a class="navitem" (click)="launchAction(menuitem)">
 							<i class="fa fa-fw fa-{{menuitem.icon}}"></i> &nbsp; {{menuitem.name}}
 						</a>
 					</li>

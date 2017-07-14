@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { QuestionBase } from '../models/question-base';
@@ -8,8 +8,25 @@ import { QuestionBase } from '../models/question-base';
   templateUrl: './form-element.component.html',
   styleUrls: ['./form-element.component.css']
 })
-export class FormElementComponent {
-  @Input() question: QuestionBase<any>;
-  @Input() form: FormGroup;
-  get isValid() { return this.form.controls[this.question.key].valid; }
+export class FormElementComponent  implements OnInit {
+  @Input()
+  question: QuestionBase;
+
+  @Input()
+  form: FormGroup;
+
+  @Input()
+  index: number;
+
+  constructor() {}
+
+  get isValid() {
+    return this.form.controls[this.question.key].valid;
+  }
+
+  ngOnInit() {
+    if (this.question.type === 'select') {
+      console.log(this.question.dataurl);
+    }
+  }
 }
