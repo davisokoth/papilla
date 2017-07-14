@@ -17,7 +17,6 @@ export class LoggedService {
   }
 
   login(token: any) {
-    console.log(JSON.stringify(token));
     localStorage.setItem('token', token);
     this.logged = true;
     localStorage.setItem('logged', 'true');
@@ -33,6 +32,8 @@ export class LoggedService {
     this.logged = false;
     localStorage.removeItem('name');
     localStorage.removeItem('ad_user_id');
+    localStorage.removeItem('user');
     localStorage.setItem('logged', 'false');
+    this._loggedSubject.next(false);
   }
 }

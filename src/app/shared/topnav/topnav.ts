@@ -12,7 +12,7 @@ declare var $: any;
 
 export class TopNavComponent {
 
-  title = 'Binker Tinker';
+  title = 'KEMSA CDS';
   isLoggedIn = false;
   subscription: Subscription;
   error: any;
@@ -24,7 +24,9 @@ export class TopNavComponent {
     private loggedService: LoggedService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.name = localStorage.getItem('name');
+  }
 
   changeTheme(color: string): void {
     let link: any = $('<link>');

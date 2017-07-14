@@ -1,16 +1,21 @@
-<div>
+<div *ngIf="questions; else loadingBlock">
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-    <div *ngFor="let question of questions" class="form-row">
-      <df-element [question]="question" [form]="form"></df-element>
+    <div *ngFor="let question of (questions ? questions : []); let index = index; trackBy: trackByIndex" class="form-row col-lg-6">
+    	
+      	<df-element [question]="questions[index]" [form]="form" *ngIf="questions[index].isdisplayed === 'Y'"></df-element>
     </div>
 
     <div class="form-row">
-      <button md-raised-button type="submit" color="primary" [disabled]="!form.valid">Save</button>
+      <button type="submit" class="btn btn-secondary" [disabled]="!form.valid">Save</button>
     </div>
   </form>
 
   <div *ngIf="payLoad" class="form-row">
-    <strong>Saved the following values</strong><br>{{payLoad}}
+    <strong>Saved the following values</strong><br>
+    {{payLoad}}
   </div>
 </div>
+<ng-template #loadingBlock>
+	<img src="/assets/img/loading.gif">
+</ng-template>

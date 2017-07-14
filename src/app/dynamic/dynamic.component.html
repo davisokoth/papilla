@@ -1,6 +1,9 @@
-<md-card flex="flex">
-  <p-panel expandIcon collapseIcon>
-    <p-header><i class="fa fa-{{form.icon}}"></i> {{form.name}}</p-header>
-    <app-dynaform [questions]="questions"></app-dynaform>
-  </p-panel>
-</md-card>
+<div class="row" *ngIf="form; else loadingBlock">
+	<div class="col-lg-12">
+    	<h2>{{form.name}}</h2>
+    	<app-dynaform [questions]="questions"></app-dynaform>
+ 	</div>
+</div>
+<ng-template #loadingBlock>
+	<img src="assets/img/loading.gif">
+</ng-template>
