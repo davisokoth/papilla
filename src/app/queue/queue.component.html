@@ -1,0 +1,17 @@
+<div *ngIf="queue; else loadingBlock">
+	<md-card class="col-lg-12">
+		
+		<h4><i class="fa fa-fw fa-stethoscope"></i> QUEUE</h4>
+		<ul id="right-pane">
+			<li *ngFor="let item of queue">
+				<a href="#">
+					<span *ngIf="item.isemergency === 'Y'"></span>
+					{{item.visitno}}- {{item.patient_name}} {{item.isemergency}} <i class="fa fa-fw fa-bolt"></i>
+				</a>
+			</li>
+		</ul>
+	</md-card>
+</div>
+<ng-template #loadingBlock>
+	<img src="assets/img/loading.gif">
+</ng-template>
