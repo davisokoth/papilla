@@ -22,4 +22,15 @@ export class PatientModel extends DynFormModel {
   postaladdress: string;
   postalcode: string;
   town: string;
+
+  calculateAge() {
+
+    let ageDifMs = Date.now() - new Date(this.dob).getTime();
+    let ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  getDob() {
+    return new Date(this.dob);
+  }
 }

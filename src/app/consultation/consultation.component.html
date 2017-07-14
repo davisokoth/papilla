@@ -1,44 +1,42 @@
-<div class="col-lg-12 row">
-	<div class="col-lg-8">
-		<div id="patient-file">
-			Name: Tee Dee<br />
-			Name: Tee Dee<br />
-			Name: Tee Dee<br />
+<div *ngIf="patient; else loadingBlock">
+	<md-card class="col-lg-12">
+		<div class="col-lg-8">
+			<div id="patient-file">
+				<h4><i class="fa fa-fw fa-user"></i>{{patient.lastname}}, {{patient.firstname}} {{patient.middlename}}</h4>
+				<h5><i class="fa fa-fw fa-file"></i>{{patient.code}}</h5>
+				<i class="fa fa-fw fa-venus-mars"></i>{{patient.gender}} 
+				<i class="fa fa-fw fa-calendar"></i><a title="DOB: {{patient.dob | date: 'mediumDate'}}">{{patient.calculateAge(patient.dob)}} yrs</a>
+			</div>
 		</div>
-	</div>
-	<div class="col-lg-4">
-		<div id="examinations">
-			<ul>
-				<li>BLAH BLAH</li>
-				<li>BLAH BLAH</li>
-				<li>BLAH BLAH</li>
-				<li>BLAH BLAH</li>
-				<li>BLAH BLAH</li>
-			</ul>
+		<div class="col-lg-4">
+			<md-card id="examinations">
+				<h4>HISTORY</h4>
+				<ul id="right-pane">
+					<li *ngFor="let visit of visits"><a href="#">{{visit.visitdate | date: 'mediumDate'}}</a></li>
+				</ul>
+			</md-card>
 		</div>
-	</div>
-	<div class="col-lg-3">
-		<div id="diagnosis">
-			<h4>DIAGNOSIS</h4>
-			<button class="btn btn-default">Add</button>
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div id="treatment">
-			<h4>TREATMENT</h4>
-			<button class="btn btn-default">Add</button>
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div id="services">
-			<h4>SERVICES</h4>
-			<button class="btn btn-default">Add</button>
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div id="special">
-			<h4>SPECIAL NOTES</h4>
-			<button class="btn btn-default">Add</button>
-		</div>
-	</div>
+	</md-card>
+	<md-card class="col-lg-12">
+		<md-tab-group>
+	   		<md-tab label="VITALS">
+	   			<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+	   		</md-tab>
+	   		<md-tab label="DIAGNOSIS">
+	   			<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+	   		</md-tab>
+			<md-tab label="SERVICES">
+				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+			</md-tab>
+			<md-tab label="TREATMENT">
+				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+			</md-tab>
+			<md-tab label="SPECIAL NOTES">
+				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+			</md-tab>
+	 		</md-tab-group>
+	</md-card>
 </div>
+<ng-template #loadingBlock>
+	<img src="assets/img/loading.gif">
+</ng-template>
