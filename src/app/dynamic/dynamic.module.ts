@@ -14,7 +14,8 @@ import { DynaformComponent } from '../dynaform/dynaform.component';
 import { FormElementComponent } from '../form-element/form-element.component';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { ConsultationComponent } from '../consultation/consultation.component';
-import {MaterialModule, OVERLAY_PROVIDERS} from '@angular/material';
+import { QueueComponent } from '../queue/queue.component';
+import { MaterialModule, OVERLAY_PROVIDERS } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -22,8 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     imports: [ CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule, FlexLayoutModule ],
     providers: [ FormService, QuestionControlService, QuestionService, LoggedService, OVERLAY_PROVIDERS, PatientService,
      VisitService ],
-    declarations: [DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent, OverlayComponent],
-    exports: [ DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent ],
+    declarations: [DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent, OverlayComponent, QueueComponent],
+    exports: [ DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent, QueueComponent ],
     entryComponents: [ OverlayComponent ]
 })
 
