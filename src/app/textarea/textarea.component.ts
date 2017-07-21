@@ -1,6 +1,12 @@
+import { Component, OnInit, Input } from '@angular/core';
 import { QuestionBase } from '../models/question-base';
 
-export class TextareaComponent extends QuestionBase {
+@Component({
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.css']
+})
+export class TextAreaComponent extends QuestionBase {
 
   type: string;
 

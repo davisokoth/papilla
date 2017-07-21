@@ -6,5 +6,6 @@ import { QueueComponent } from '../queue/queue.component';
 export const DynamicRoutes: Routes = [
   { path: 'dynamic/:c_form_id', component: DynamicComponent },
   { path: 'consultation', component: ConsultationComponent },
+  { path: 'cashier', component: ConsultationComponent },
   { path: 'queue', component: QueueComponent }
 ];
