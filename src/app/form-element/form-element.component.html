@@ -1,30 +1,56 @@
 <div [formGroup]="form">
-	<!-- <label [attr.for]="question.key">{{question.label}}</label> -->
+	<!-- <label [attr.for]="question.element">{{question.label}}</label> -->
 	
 	<div [ngSwitch]="question.type" class="inputgroup">
-	
-	  <input *ngSwitchCase="'email'" [formControlName]="question.key"
-	      [id]="question.key" [type]="email" [placeholder]="question.label">
-	
-	  <input *ngSwitchCase="'text'" [formControlName]="question.key"
-	      [id]="question.key" [type]="question.type" [placeholder]="question.label">
-	
-	  <input *ngSwitchCase="'autocomplete'" [formControlName]="question.key"
-	      [id]="question.key" [type]="text" [placeholder]="question.label">
-	
-	  <input *ngSwitchCase="'number'" [formControlName]="question.key"
-	      [id]="question.key" [type]="number" [placeholder]="question.label">
-	
-	  <input *ngSwitchCase="'date'" [formControlName]="question.key"
-	      [id]="question.key" [type]="date" [placeholder]="question.label">
-	
-	  <select *ngSwitchCase="'select'">
-	  	<option *ngFor="let option of question.options" value="option.value">{{option.name}}</option>
-	  </select>
-	
-	  <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
-	            [id]="question.key" [type]="question.type" [placeholder]="question.label">
-	
+	  
+		<div *ngSwitchCase="'date'">
+			<md-input-container>
+				<input mdInput [mdDatepicker]="picker"  formControlName="{{question.element}}"
+					[id]="question.element" [type]="date" placeholder="{{question.label}}">
+				<button mdSuffix [mdDatepickerToggle]="picker"></button>
+			</md-input-container>
+			<md-datepicker #picker></md-datepicker>
+		</div>
+
+		<!--
+		<input *ngSwitchCase="'date'" formControlName="{{question.element}}"
+			[id]="question.element" [type]="date" [placeholder]="question.label">
+		-->
+
+		<div *ngSwitchCase="'email'">
+			<md-input-container>
+				<input *ngSwitchCase="'email'" mdInput formControlName="{{question.element}}"
+					[id]="question.element" [type]="email" placeholder="{{question.label}}">
+			</md-input-container>
+		</div>
+
+		<div *ngSwitchCase="'textarea'">
+			<md-input-container>
+				<input formControlName="{{question.element}}" [id]="question.element"
+				mdInput placeholder="{{question.label}}" maxlength="256">
+			</md-input-container>
+		</div>
+			
+		<div *ngSwitchCase="'text'">
+			<md-input-container>
+				<input formControlName="{{question.element}}" mdInput [id]="question.element"
+				[type]="question.type" placeholder="{{question.label}}">
+			</md-input-container>
+		</div>
+		
+		<app-autocomplete *ngSwitchCase="'autocomplete'" formControlName="{{question.element}}"
+			[id]="question.element" [endpoint]="question.dataurl" name="{{question.element}}"
+			[label]="question.label"
+			[(ngModel)]="text" (completeMethod)="search($event)" ngDefaultControl>
+		</app-autocomplete>
+
+		<input *ngSwitchCase="'number'" formControlName="{{question.element}}" name="{{question.element}}"
+			[id]="question.element" [type]="number" [placeholder]="question.label">
+		
+		<select *ngSwitchCase="'select'" formControlName="{{question.element}}">
+			<option *ngFor="let option of question.options" value="option.value">{{option.name}}</option>
+		</select>
+		
 	</div> 
-	<!-- <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div> -->
+	<div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
 </div>

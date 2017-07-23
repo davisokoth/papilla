@@ -42,9 +42,7 @@ export class DynamicComponent implements OnInit {
     private fService: FormService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    console.log(this.c_form_id);
-  }
+  ) {}
 
   getForm(c_form_id: number) {
     this.fService.getForm(c_form_id).subscribe(

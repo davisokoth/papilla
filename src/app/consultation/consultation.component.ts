@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
 import { Overlay, OverlayState, ComponentPortal } from '@angular/material';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
+import { Router, ActivatedRoute } from '@angular/router';
 // import { PatientService } from '../services/patient.service';
 import { VisitService } from '../services/visit.service';
 import { PatientVisitModel } from '../models/patientvisit';
@@ -14,16 +15,20 @@ import { PatientVisitModel } from '../models/patientvisit';
 export class ConsultationComponent implements OnInit {
 
   patient: PatientVisitModel;
-  v_id = 54;
+  p_visit_id: number;
   visits: PatientVisitModel[] = [];
 
   constructor(
-    public overlay: Overlay,
-    public viewContainerRef: ViewContainerRef,
-    // public patientService: PatientService,
-    public visitService: VisitService
-  ) {
-    visitService.getVisit(this.v_id).subscribe(
+    private overlay: Overlay,
+    private viewContainerRef: ViewContainerRef,
+    private visitService: VisitService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.p_visit_id = this.route.snapshot.params['p_visit_id'];
+    console.log("Visit: " + this.p_visit_id);
+    this.visitService.getVisit(this.p_visit_id).subscribe(
       data => {
         this.patient = data[0];
         this.getHistory();
@@ -31,9 +36,6 @@ export class ConsultationComponent implements OnInit {
       error => {
         console.log(error);
       });
-  }
-
-  ngOnInit() {
   }
 
   openRotiniPanel() {
@@ -44,6 +46,8 @@ export class ConsultationComponent implements OnInit {
     // Davis: Quick hack to allow me to pass info to the overlay. Not sure if this is the most optimal way :|
     // The record id immediately destroyed from localStorage by OverlayComponent
     localStorage.setItem('overlay_c_form_id', '29');
+    localStorage.setItem('overlay_hasparent', 'Y');
+    localStorage.setItem('overlay_parent_id', this.p_visit_id + '');
 
     let overlayRef = this.overlay.create(config);
     overlayRef.attach(new ComponentPortal(OverlayComponent, this.viewContainerRef));

@@ -1,0 +1,8 @@
+<md-input-container>
+   <input type="text" mdInput name="{{name}}" placeholder="{{label}}">
+</md-input-container>
+<md-autocomplete>
+   <md-option *ngFor="let option of results" [value]="option">
+      {{ option }}
+   </md-option>
+</md-autocomplete>
