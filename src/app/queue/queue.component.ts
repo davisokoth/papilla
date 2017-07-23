@@ -34,8 +34,9 @@ export class QueueComponent implements OnInit {
   ngOnInit() {
   }
 
-  openRecord(p_visit_id: number) {
-    this.router.navigate([`/dashboard/dynamic/${p_visit_id}`]);
+  openRecord(p_visit: any) {
+    console.log(p_visit);
+    this.router.navigate([`/dashboard/consultation/${p_visit.p_visit_id}`]);
   }
 
 }

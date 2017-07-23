@@ -37,7 +37,6 @@ export class VisitService {
   }
 
   toModel (r: any): PatientVisitModel {
-    console.log(r);
     const visit = new PatientVisitModel();
     visit.p_visit_id = r.p_visit_id;
     visit.c_node_id = r.c_node_id;

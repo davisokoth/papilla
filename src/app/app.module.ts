@@ -16,7 +16,7 @@ import { MenuService } from './services/menu.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,

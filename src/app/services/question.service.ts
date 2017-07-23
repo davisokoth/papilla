@@ -14,7 +14,7 @@ export class QuestionService {
   getQuestions(c_form_id: number): Observable<QuestionBase[]> {
 
     let questions$ = this.http
-      .get(`${this.url}c_fields?filter[where][c_form_id]=${c_form_id}`)
+      .get(`${this.url}c_fields?filter[where][c_form_id]=${c_form_id}&filter[order]=sequence`)
       .map(response => response.json().map(this.toModel));
     return questions$;
   }
