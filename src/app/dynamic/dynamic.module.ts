@@ -21,26 +21,25 @@ import { FormElementComponent } from '../form-element/form-element.component';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { QueueComponent } from '../queue/queue.component';
 import { AutoCompleteComponent } from '../auto-complete/auto-complete.component';
-// import { SelectComponent } from '../select/select.component';
-// import { TextComponent } from '../text/text.component';
-// import { TextAreaComponent } from '../textarea/textarea.component';
-
+import { CompleteCmpMd } from '../complete-cmp-md/complete-cmp-md.component';
+import { VitalsComponent } from '../vitals/vitals.component';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 @NgModule({
     imports: [ 
         CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule, 
-        FlexLayoutModule, MdNativeDateModule ],
+        FlexLayoutModule, MdNativeDateModule, Ng2CompleterModule ],
     providers: [ FormService, QuestionControlService, QuestionService, LoggedService, OVERLAY_PROVIDERS, PatientService,
-     UniversalService, VisitService ],
+        UniversalService, VisitService ],
     declarations: [
-        AutoCompleteComponent,
+        AutoCompleteComponent, CompleteCmpMd,
         DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent,
-        OverlayComponent, QueueComponent
+        OverlayComponent, QueueComponent, VitalsComponent
     ],
     exports: [
-        AutoCompleteComponent,
+        AutoCompleteComponent, CompleteCmpMd,
         DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent,
-        QueueComponent
+        QueueComponent, VitalsComponent
     ],
     entryComponents: [ OverlayComponent ]
 })

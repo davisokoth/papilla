@@ -5,4 +5,8 @@ export class User {
   firstName: string;
   lastName: string;
   c_bpartner_id: number;
+
+  constructor(public name?: string){
+    this.username = name;
+  }
 }

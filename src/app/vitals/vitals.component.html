@@ -1,0 +1,20 @@
+<md-card>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xl-6 app-autocomplete">
+      <app-autocomplete 
+        [endpoint]="endpoint" name="vital" 
+        [label]="placeholder" 
+        [primarykey]="primarykey"
+        [(ngModel)]="text" ngDefaultControl>
+      </app-autocomplete>
+    </div>
+    <md-input-container>
+      <input mdInput name="notes" type="text" [(ngModel)]="notes" placeholder="Notes">
+    </md-input-container>
+    <input name="p_visit_id" type="hidden" value="p_visit_id">
+    <button class="btn btn-default" (click)="persist()">Add</button>
+  </div>
+  <div *ngFor="let item of vitals" class="row">
+    <div class="col-lg-6">Lelele</div>
+  </div>
+</md-card>
