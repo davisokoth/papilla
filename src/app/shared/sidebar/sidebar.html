@@ -2,6 +2,12 @@
 	(click)="eventCalled()">&#9776; Yoyo</button>
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
 	<ul class="list-group">
+		<li>
+			<a class="navitem" routerLink="cashier" >
+							<i class="fa fa-fw fa-cog"></i> &nbsp;Cashier
+						</a>
+		</li>
+
 		<div *ngFor="let menu of menus">
 			<a class="navitem" href="#" data-toggle="collapse" [attr.data-target]="'#menu-' + menu.c_menu_id"> 
 				<i class="fa fa-plus"></i> &nbsp; {{menu.name}}

@@ -13,14 +13,28 @@ import { DynamicModule } from './dynamic/dynamic.module';
 import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { MenuService } from './services/menu.service';
+import { PrintComponent } from './print/print.component';
+import { PrintcomponentComponent } from './printcomponent/printcomponent.component';
+import { CashierComponent } from './cashier/cashier.component';
+import {CashierserviceService} from './services/cashierservice.service';
+import { SelectedbillComponent } from './selectedbill/selectedbill.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    PrintcomponentComponent,
+    CashierComponent,
+    SelectedbillComponent,
+
+     
+
   ],
   imports: [
     BrowserAnimationsModule,
-    BrowserModule,
+    BrowserModule,    
     DynamicModule,
     FormsModule,
     HttpModule,
@@ -30,7 +44,7 @@ import { MenuService } from './services/menu.service';
     SignupModule,
     DashboardModule
   ],
-  providers: [ MenuService, ],
+  providers: [ MenuService,CashierserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
