@@ -9,7 +9,6 @@ import { URL } from '../globals';
 export class AuthenticationService {
 
   url = URL;
-  version = '22.2.2';
   logged = false;
   username: string;
   lToken: string;

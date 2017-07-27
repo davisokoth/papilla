@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewContainerRef, Input } from '@angular/core';
 import { Overlay, OverlayState, ComponentPortal } from '@angular/material';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { Router, ActivatedRoute } from '@angular/router';
 // import { PatientService } from '../services/patient.service';
 import { VisitService } from '../services/visit.service';
 import { PatientVisitModel } from '../models/patientvisit';
+import { VitalsComponent } from '../vitals/vitals.component';
 
 @Component({
   selector: 'app-consultation',
@@ -45,7 +46,7 @@ export class ConsultationComponent implements OnInit {
 
     // Davis: Quick hack to allow me to pass info to the overlay. Not sure if this is the most optimal way :|
     // The record id immediately destroyed from localStorage by OverlayComponent
-    localStorage.setItem('overlay_c_form_id', '29');
+    localStorage.setItem('overlay_c_form_id', '36');
     localStorage.setItem('overlay_hasparent', 'Y');
     localStorage.setItem('overlay_parent_id', this.p_visit_id + '');
 

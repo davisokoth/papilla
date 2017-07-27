@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule, MdNativeDateModule, OVERLAY_PROVIDERS } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+// import { ConsultationModule } from '../consultation/consultation.module';
 
 import { QuestionControlService }    from '../services/question-control.service';
 import { QuestionService } from '../services/question.service';
@@ -14,33 +15,34 @@ import { PatientService } from '../services/patient.service';
 import { VisitService } from '../services/visit.service';
 import { UniversalService } from '../services/universal.service';
 
-import { ConsultationComponent } from '../consultation/consultation.component';
 import { DynamicComponent } from './dynamic.component';
 import { DynaformComponent } from '../dynaform/dynaform.component';
 import { FormElementComponent } from '../form-element/form-element.component';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { QueueComponent } from '../queue/queue.component';
+import { Ng2CompleterModule } from 'ng2-completer';
 import { AutoCompleteComponent } from '../auto-complete/auto-complete.component';
-// import { SelectComponent } from '../select/select.component';
-// import { TextComponent } from '../text/text.component';
-// import { TextAreaComponent } from '../textarea/textarea.component';
 
+import { ConsultationComponent } from '../consultation/consultation.component';
+import { PrescriptionComponent } from '../prescription/prescription.component';
+import { VitalsComponent } from '../vitals/vitals.component';
 
 @NgModule({
     imports: [ 
         CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule, 
-        FlexLayoutModule, MdNativeDateModule ],
-    providers: [ FormService, QuestionControlService, QuestionService, LoggedService, OVERLAY_PROVIDERS, PatientService,
-     UniversalService, VisitService ],
+        FlexLayoutModule, MdNativeDateModule, Ng2CompleterModule
+    ],
+    providers: [ FormService, QuestionControlService, QuestionService, LoggedService, 
+        OVERLAY_PROVIDERS, PatientService, UniversalService, VisitService 
+    ],
     declarations: [
-        AutoCompleteComponent,
-        DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent,
-        OverlayComponent, QueueComponent
+        DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, 
+        OverlayComponent, QueueComponent, ConsultationComponent, PrescriptionComponent,
+        AutoCompleteComponent
     ],
     exports: [
-        AutoCompleteComponent,
-        DynamicComponent, DynaformComponent, FormElementComponent, ConsultationComponent,
-        QueueComponent
+        DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent,
+        QueueComponent, ConsultationComponent, PrescriptionComponent, AutoCompleteComponent
     ],
     entryComponents: [ OverlayComponent ]
 })

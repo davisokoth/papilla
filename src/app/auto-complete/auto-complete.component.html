@@ -1,8 +1,10 @@
-<md-input-container>
-   <input type="text" mdInput name="{{name}}" placeholder="{{label}}">
-</md-input-container>
-<md-autocomplete>
-   <md-option *ngFor="let option of results" [value]="option">
-      {{ option }}
-   </md-option>
-</md-autocomplete>
+<div class="mdEmulation">
+    <ng2-completer [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="0"
+        [placeholder]="label" inputClass="['no-border']" (selected)="selected($event)">
+    </ng2-completer>
+</div>
+<!--
+<ng2Completer-md [(ngModel)]="searchText" [dataService]="dataService" 
+    [maxChars]="4" [placeholder]="'search country'" [matchClass]="'match'">
+</ng2Completer-md>
+-->

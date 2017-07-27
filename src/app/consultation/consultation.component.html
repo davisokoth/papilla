@@ -3,9 +3,12 @@
 		<div class="col-lg-8">
 			<div id="patient-file">
 				<h4><i class="fa fa-fw fa-user"></i>{{patient.patient_name}}</h4>
-				<i class="fa fa-fw fa-file"></i>{{patient.visitno}} 
-				<i class="fa fa-fw fa-venus-mars"></i>{{patient.gender}} 
+				<i class="fa fa-fw fa-file"></i>{{patient.visitno}} &nbsp; | &nbsp;
+				<i class="fa fa-fw fa-venus-mars"></i>{{patient.gender}}  &nbsp; | &nbsp;
 				<i class="fa fa-fw fa-calendar"></i><a title="DOB: {{patient.dob | date: 'mediumDate'}}">{{patient.calculateAge(patient.dob)}} yrs</a>
+			</div>
+			<div id="known-conditions">
+				<i class="fa fa-fw fa-file"></i> Known Conditions: <br />
 			</div>
 		</div>
 		<div class="col-lg-4">
@@ -22,16 +25,17 @@
 	<md-card class="col-lg-12">
 		<md-tab-group>
 	   		<md-tab label="VITALS">
-	   			<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+				<app-vitals [p_visit_id]="p_visit_id"></app-vitals>
 	   		</md-tab>
 	   		<md-tab label="DIAGNOSIS">
-	   			<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+	   			
 	   		</md-tab>
 			<md-tab label="SERVICES">
 				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
 			</md-tab>
 			<md-tab label="TREATMENT">
-				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
+				<app-prescription [p_visit_id]="p_visit_id" [c_patient_id]="patient.c_patient_id">
+				</app-prescription>
 			</md-tab>
 			<md-tab label="SPECIAL NOTES">
 				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>

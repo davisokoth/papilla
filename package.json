@@ -36,12 +36,12 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "moment": "2.15.1",
     "ng2-bootstrap": "2.0.0-rc.0",
-    
+    "ng2-completer": "^1.6.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "^5.1.0",
     "ts-helpers": "1.1.1",
     "webpack-dev-middleware": "^1.11.0",
-    "zone.js": "0.7.2"
+    "zone.js": "0.8.5"
   },
   "devDependencies": {
     "@angular/cli": "^1.2.0",
