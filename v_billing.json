@@ -1,0 +1,58 @@
+{
+  "name": "v_billing",
+  "plural": "v_billings",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "postgresql": {
+      "schema": "cds",
+      "table": "v_billing"
+    }
+  },
+  "properties": {
+    "b_billing_id": {
+      "type": "number",
+      "id":true,
+      "generated":true
+    },
+    "paymode": {
+      "type": "string"
+    },
+    "p_payment_id": {
+      "type": "number"
+    },
+    "patientname": {
+      "type": "string"
+    },
+    "visitnumber": {
+      "type": "string"
+    },
+    "patientno": {
+      "type": "string"
+    },
+    "documentno": {
+      "type": "string"
+    },
+    "p_visit_id": {
+      "type": "number"
+    },
+    "c_patient_id": {
+      "type": "number"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "c_facility_id": {
+      "type": "number"
+    },
+    "documentno": {
+      "type": "string",
+      "required": true
+    }   
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
