@@ -17,6 +17,7 @@ import { UniversalService } from '../services/universal.service';
 
 import { DynamicComponent } from './dynamic.component';
 import { DynaformComponent } from '../dynaform/dynaform.component';
+import { PrintComponent } from '../print/print.component';
 import { FormElementComponent } from '../form-element/form-element.component';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { QueueComponent } from '../queue/queue.component';
@@ -26,6 +27,12 @@ import { AutoCompleteComponent } from '../auto-complete/auto-complete.component'
 import { ConsultationComponent } from '../consultation/consultation.component';
 import { PrescriptionComponent } from '../prescription/prescription.component';
 import { VitalsComponent } from '../vitals/vitals.component';
+
+import { PrintComponent } from './print/print.component';
+import { PrintcomponentComponent } from './printcomponent/printcomponent.component';
+import { CashierComponent } from './cashier/cashier.component';
+import {CashierserviceService} from './services/cashierservice.service';
+import { SelectedbillComponent } from './selectedbill/selectedbill.component';
 
 @NgModule({
     imports: [ 
@@ -38,11 +45,13 @@ import { VitalsComponent } from '../vitals/vitals.component';
     declarations: [
         DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, 
         OverlayComponent, QueueComponent, ConsultationComponent, PrescriptionComponent,
-        AutoCompleteComponent
+        AutoCompleteComponent, PrintComponent, PrintcomponentComponent, CashierComponent,
+        SelectedbillComponent,
     ],
     exports: [
-        DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent,
-        QueueComponent, ConsultationComponent, PrescriptionComponent, AutoCompleteComponent
+        DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, PrintComponent,
+        QueueComponent, ConsultationComponent, PrescriptionComponent, AutoCompleteComponent,
+        PrintComponent, PrintcomponentComponent, CashierComponent, SelectedbillComponent,
     ],
     entryComponents: [ OverlayComponent ]
 })

@@ -6,6 +6,7 @@ import { MenuModel } from './models/menu';
 
 import { LoggedService } from './services/logged.service';
 import { MenuService } from './services/menu.service';
+import {CashierserviceService} from './services/cashierservice.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent {
     private loggedService: LoggedService,
     private menuService: MenuService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private mycashierservice:CashierserviceService
   ) {
     this.subscription = this.loggedService.isLoggedin().subscribe(isLoggedIn => {
       this.isLoggedIn = this.loggedService.logged;

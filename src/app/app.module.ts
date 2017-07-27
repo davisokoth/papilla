@@ -16,11 +16,11 @@ import { MenuService } from './services/menu.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserAnimationsModule,
-    BrowserModule,
+    BrowserModule,    
     DynamicModule,
     FormsModule,
     HttpModule,
@@ -30,7 +30,7 @@ import { MenuService } from './services/menu.service';
     SignupModule,
     DashboardModule
   ],
-  providers: [ MenuService, ],
+  providers: [ MenuService,CashierserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
