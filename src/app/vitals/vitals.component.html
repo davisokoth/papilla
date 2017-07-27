@@ -5,7 +5,8 @@
         [endpoint]="endpoint" name="vital" 
         [label]="placeholder" 
         [primarykey]="primarykey"
-        [(ngModel)]="text" ngDefaultControl>
+        [(ngModel)]="text" 
+        (emitProduct)="selected($event)" ngDefaultControl>
       </app-autocomplete>
     </div>
     <md-input-container>
@@ -14,7 +15,9 @@
     <input name="p_visit_id" type="hidden" value="p_visit_id">
     <button class="btn btn-default" (click)="persist()">Add</button>
   </div>
-  <div *ngFor="let item of vitals" class="row">
-    <div class="col-lg-6">Lelele</div>
-  </div>
+  <table class="table table-bordered table-striped">
+    <tr *ngFor="let item of vitals">
+      <td>{{item.product.toUpperCase()}}</td><td>{{item.notes}}</td><td>Normal</td>
+    </tr>
+  </table>
 </md-card>

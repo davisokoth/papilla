@@ -8,7 +8,6 @@ import { VitalModel } from '../models/vital';
 export class UniversalService {
 
   url = URL;
-  version = '22.2.2';
   logged = false;
   username: string;
   lToken: string;
@@ -30,6 +29,18 @@ export class UniversalService {
     vital.m_product_id = r.m_product_id;
     vital.notes = r.notes;
     return vital;
+  }
+
+  doPost(model: any, url: string): Observable<any> {
+      return this.http.post(this.url + url, JSON.stringify(model), {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+      .map((res: any) => {
+        const data = res.json();
+        // console.log(data);
+      });
   }
 
 }

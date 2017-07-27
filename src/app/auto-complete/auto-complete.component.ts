@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UniversalService } from '../services/universal.service';
 import { Observable } from 'rxjs/Observable';
@@ -18,6 +18,8 @@ export class AutoCompleteComponent {
   @Input() datasource: string;
   @Input() primarykey: string;
 
+  @Output() emitProduct: EventEmitter<any> = new EventEmitter<any>();
+
   myControl = new FormControl();
   searchText: string;
   options: any[];
@@ -33,13 +35,21 @@ export class AutoCompleteComponent {
    }
 
    ngOnInit() {
-     this.uService.search(this.endpoint).subscribe(data => {
-      this.options = data;
-      this.dataService = this.completerService.local(this.options, 'name', 'name');
-    });
+     this.getData();
    }
 
    public selected(selected: any) {
-      console.log(selected.originalObject[this.primarykey]);
+      if(selected){
+        this.emitProduct.emit(selected.originalObject);
+        console.log(this.primarykey + ': ' + selected.originalObject[this.primarykey]);
+        this.getData();
+      }
+   }
+
+   private getData(){
+      this.uService.search(this.endpoint).subscribe(data => {
+        this.options = data;
+        this.dataService = this.completerService.local(this.options, 'name', 'name');
+      });
    }
 }
