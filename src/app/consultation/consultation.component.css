@@ -1,5 +1,8 @@
 #right-pane {
 	list-style: none;
 	-webkit-padding-start: 0px;
+}
+
+#right-pane > li {
 	border-bottom: thin solid #00f;
 }

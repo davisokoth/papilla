@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewContainerRef, Input } from '@angular/core';
 import { Overlay, OverlayState, ComponentPortal } from '@angular/material';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
-import { PatientService } from '../services/patient.service';
+import { Router, ActivatedRoute } from '@angular/router';
+// import { PatientService } from '../services/patient.service';
 import { VisitService } from '../services/visit.service';
-import { PatientModel } from '../models/patient';
-import { VisitModel } from '../models/visit';
+import { PatientVisitModel } from '../models/patientvisit';
+import { VitalsComponent } from '../vitals/vitals.component';
 
 @Component({
   selector: 'app-consultation',
@@ -14,34 +15,28 @@ import { VisitModel } from '../models/visit';
 })
 export class ConsultationComponent implements OnInit {
 
-  patient: PatientModel;
-  p_id = 52;
-  visits: VisitModel[] = [];
+  patient: PatientVisitModel;
+  p_visit_id: number;
+  visits: PatientVisitModel[] = [];
 
   constructor(
-    public overlay: Overlay,
-    public viewContainerRef: ViewContainerRef,
-    public patientService: PatientService,
-    public visitService: VisitService
-  ) {
-    patientService.getPatientModel(this.p_id).subscribe(
-      data => {
-        this.patient = data[0];
-      },
-      error => {
-        console.log(error);
-      });
-    
-    visitService.getVisits(this.p_id).subscribe(
-      data => {
-        this.visits = data;
-      },
-      error => {
-        console.log(error);
-      });
-  }
+    private overlay: Overlay,
+    private viewContainerRef: ViewContainerRef,
+    private visitService: VisitService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.p_visit_id = this.route.snapshot.params['p_visit_id'];
+    console.log("Visit: " + this.p_visit_id);
+    this.visitService.getVisit(this.p_visit_id).subscribe(
+      data => {
+        this.patient = data[0];
+        this.getHistory();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   openRotiniPanel() {
@@ -49,8 +44,24 @@ export class ConsultationComponent implements OnInit {
 
     config.positionStrategy = this.overlay.position().global().left('0px').top('0px');
 
+    // Davis: Quick hack to allow me to pass info to the overlay. Not sure if this is the most optimal way :|
+    // The record id immediately destroyed from localStorage by OverlayComponent
+    localStorage.setItem('overlay_c_form_id', '36');
+    localStorage.setItem('overlay_hasparent', 'Y');
+    localStorage.setItem('overlay_parent_id', this.p_visit_id + '');
+
     let overlayRef = this.overlay.create(config);
     overlayRef.attach(new ComponentPortal(OverlayComponent, this.viewContainerRef));
+  }
+
+  getHistory() {
+    this.visitService.getVisits(this.patient.c_patient_id).subscribe(
+      data => {
+        this.visits = data;
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 }

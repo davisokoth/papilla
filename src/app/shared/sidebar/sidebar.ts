@@ -61,13 +61,11 @@ export class SidebarComponent {
   }
 
   launchAction(menu: MenuModel) {
-    // alert('Ho, ' + menu.c_menu_id);
-    this.router.navigate([`/dashboard/dynamic/${menu.c_form_id}`]);
-  }
-
-  launchAsset(item: MenuModel) {
-    if (item.action === 'form') {
-      this.router.navigate(['/dynamic'], item.c_form_id);
+    if (menu.action === 'form') {
+      this.router.navigate([`/dashboard/dynamic/${menu.c_form_id}`]);
+    }
+    if (menu.action === 'activity') {
+      this.router.navigate([`/dashboard/queue`]);
     }
   }
 }

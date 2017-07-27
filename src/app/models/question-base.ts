@@ -1,5 +1,6 @@
 export class QuestionBase {
   value: string;
+  element: string;
   name: string;
   key: string;
   label: string;
@@ -18,7 +19,7 @@ export class QuestionBase {
 
   constructor(
       value?: string,
-      name?: string,
+      element?: string,
       key?: string,
       label?: string,
       required?: boolean,
@@ -35,6 +36,7 @@ export class QuestionBase {
       options?: {key: string, value: string}[]
     ) {
     this.value = value;
+    this.element = element;
     this.name = name;
     this.key = key || '';
     this.label = label || '';

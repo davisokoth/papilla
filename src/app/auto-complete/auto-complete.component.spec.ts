@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckboxComponent } from './checkbox.component';
+import { AutoCompleteComponent } from './auto-complete.component';
 
-describe('CheckboxComponent', () => {
-  let component: CheckboxComponent;
-  let fixture: ComponentFixture<CheckboxComponent>;
+describe('AutoCompleteComponent', () => {
+  let component: AutoCompleteComponent;
+  let fixture: ComponentFixture<AutoCompleteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckboxComponent ]
+      declarations: [ AutoCompleteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckboxComponent);
+    fixture = TestBed.createComponent(AutoCompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

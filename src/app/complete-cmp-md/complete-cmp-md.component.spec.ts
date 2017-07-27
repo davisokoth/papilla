@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmailComponent } from './email.component';
+import { CompleteCmpMdComponent } from './complete-cmp-md.component';
 
-describe('EmailComponent', () => {
-  let component: EmailComponent;
-  let fixture: ComponentFixture<EmailComponent>;
+describe('CompleteCmpMdComponent', () => {
+  let component: CompleteCmpMdComponent;
+  let fixture: ComponentFixture<CompleteCmpMdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmailComponent ]
+      declarations: [ CompleteCmpMdComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmailComponent);
+    fixture = TestBed.createComponent(CompleteCmpMdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
