@@ -38,11 +38,13 @@
 			</md-input-container>
 		</div>
 		
+		<!--
 		<app-autocomplete *ngSwitchCase="'autocomplete'" formControlName="{{question.element}}"
 			[id]="question.element" [endpoint]="question.dataurl" name="{{question.element}}"
 			[label]="question.label"
 			[(ngModel)]="text" (completeMethod)="search($event)" ngDefaultControl>
 		</app-autocomplete>
+		-->
 
 		<input *ngSwitchCase="'number'" formControlName="{{question.element}}" name="{{question.element}}"
 			[id]="question.element" [type]="number" [placeholder]="question.label">

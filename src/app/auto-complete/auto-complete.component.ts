@@ -25,9 +25,9 @@ export class AutoCompleteComponent {
   options: any[];
   filteredOptions: Observable<any[]>;
    
-  protected searchStr: string;
-  protected captain: string;
-  protected dataService: CompleterData;
+  searchStr: string;
+  captain: string;
+  dataService: CompleterData;
 
    constructor(private uService: UniversalService, private completerService: CompleterService) {
      // this.dataService = completerService.local(this.searchData, 'color', 'color');

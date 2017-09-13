@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {URL} from '../globals';
@@ -27,7 +27,7 @@ export class CashierserviceService {
   }
 
   postPayment(model) {
-    return this.http.post(this.url + 'b_payments', {
+    return this.http.post(this.url + 'b_payments', model, {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
