@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CompleteCmpMdComponent } from './complete-cmp-md.component';
 
 describe('CompleteCmpMdComponent', () => {

@@ -10,7 +10,7 @@ import { BSComponentRoutes } from './bs-component/bsComponent.routes';
 import { BSElementRoutes } from './bs-element/bsElement.routes';
 import { DynamicRoutes } from '../dynamic/dynamic.routes';
 
-import { DashboardComponent } from './index';
+import { DashboardComponent } from './dashboard.component';
 
 export const DashboardRoutes: Route[] = [
     {

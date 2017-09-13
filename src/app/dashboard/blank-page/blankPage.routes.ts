@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { BlankPageComponent } from './index';
+import { BlankPageComponent } from './blankPage.component';
 
 export const BlankPageRoutes: Route[] = [
   {

@@ -1,6 +1,5 @@
 import { Route } from '@angular/router';
-
-import { TableComponent } from './index';
+import { TableComponent } from './table.component';
 
 export const TableRoutes: Route[] = [
   {

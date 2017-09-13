@@ -10,9 +10,9 @@ export class SelectComponent extends QuestionBase {
   type: string;
   options: {key: string, value: string}[] = [];
 
-  constructor(options) {
+  constructor() {
     super();
-    this.options = options || [];
+    this.options = [];
     this.type = 'select';
   }
 }

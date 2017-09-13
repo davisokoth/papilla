@@ -7,7 +7,8 @@
 			<md-input-container>
 				<input mdInput [mdDatepicker]="picker"  formControlName="{{question.element}}"
 					[id]="question.element" [type]="date" placeholder="{{question.label}}">
-				<button mdSuffix [mdDatepickerToggle]="picker"></button>
+				<md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+				<!-- <button mdSuffix [mdDatepickerToggle]="picker"></button> -->
 			</md-input-container>
 			<md-datepicker #picker></md-datepicker>
 		</div>

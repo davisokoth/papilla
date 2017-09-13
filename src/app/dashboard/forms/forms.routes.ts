@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { FormComponent } from './index';
+import { FormComponent } from './forms.component';
 
 export const FormRoutes: Route[] = [
   {
