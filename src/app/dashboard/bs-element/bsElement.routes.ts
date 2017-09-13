@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { BSElementComponent } from './index';
+import { BSElementComponent } from './bsElement.component';
 
 export const BSElementRoutes: Route[] = [
   {

@@ -10,7 +10,7 @@ export class TextAreaComponent extends QuestionBase {
 
   type: string;
 
-  constructor(options: {} = {}) {
+  constructor() {
     super();
     this.type = 'textarea';
   }

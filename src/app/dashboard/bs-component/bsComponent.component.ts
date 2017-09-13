@@ -132,6 +132,9 @@ export class BSComponentComponent {
     { id: 49, name: 'West Virginia' }, { id: 50, name: 'Wisconsin' },
     { id: 51, name: 'Wyoming' }];
 
+  // Davis addition for error fixing
+  isActive: any;
+
   public constructor() {
     this.random();
     this.randomStacked();

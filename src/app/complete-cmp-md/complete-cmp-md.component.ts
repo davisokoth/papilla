@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter, OnInit, ViewChild, forwardRef }
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CtrCompleter, CompleterData, CompleterItem } from 'ng2-completer';
 import { MAX_CHARS, MIN_SEARCH_LENGTH, PAUSE, TEXT_SEARCHING, TEXT_NO_RESULTS } from "../globals";
-import "rxjs/add/operator/catch";
+// import { MdInput } from '@angular/material';
+import 'rxjs/add/operator/catch';
 
 const noop = () => { };
 const COMPLETER_CONTROL_VALUE_ACCESSOR = {

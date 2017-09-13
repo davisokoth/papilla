@@ -257,7 +257,7 @@
 		<div class="card card-block">
 			<h4 class="card-title">Default</h4>
 			<rating [(ngModel)]="rate" [max]="maxRating" [readonly]="isReadonly"
-				(onHover)="hoveringOver($event)" (onLeave)="resetStar($event)"
+				(onHover)="hoveringOver($event)" (onLeave)="resetStar()"
 				[titles]="['one','two','three']"></rating>
 			<span class="label"
 				[ngClass]="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"

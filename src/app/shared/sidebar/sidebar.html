@@ -3,7 +3,12 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
 	<ul class="list-group">
 		<div *ngFor="let menu of menus">
-			<a class="navitem" href="#" data-toggle="collapse" [attr.data-target]="'#menu-' + menu.c_menu_id">
+			<!-- data-toggle="collapse" [attr.data-target]="'#menu-' + menu.c_menu_id" -->
+			<a 
+				class="navitem" 
+				data-toggle="collapse" 
+				[attr.data-target]="'#menu-' + menu.c_menu_id"
+			>
 				<i class="fa fa-plus"></i> &nbsp; {{menu.name}}
 			</a>
 			<div id="menu-{{menu.c_menu_id}}" class="collapse">
