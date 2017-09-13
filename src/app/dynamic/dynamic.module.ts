@@ -17,7 +17,6 @@ import { UniversalService } from '../services/universal.service';
 
 import { DynamicComponent } from './dynamic.component';
 import { DynaformComponent } from '../dynaform/dynaform.component';
-import { PrintComponent } from '../print/print.component';
 import { FormElementComponent } from '../form-element/form-element.component';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { QueueComponent } from '../queue/queue.component';
@@ -28,11 +27,11 @@ import { ConsultationComponent } from '../consultation/consultation.component';
 import { PrescriptionComponent } from '../prescription/prescription.component';
 import { VitalsComponent } from '../vitals/vitals.component';
 
-import { PrintComponent } from './print/print.component';
-import { PrintcomponentComponent } from './printcomponent/printcomponent.component';
-import { CashierComponent } from './cashier/cashier.component';
-import {CashierserviceService} from './services/cashierservice.service';
-import { SelectedbillComponent } from './selectedbill/selectedbill.component';
+import { PrintComponent } from '../print/print.component';
+import { PrintcomponentComponent } from '../printcomponent/printcomponent.component';
+import { CashierComponent } from '../cashier/cashier.component';
+import {CashierserviceService} from '../services/cashierservice.service';
+import { SelectedbillComponent } from '../selectedbill/selectedbill.component';
 
 @NgModule({
     imports: [ 
@@ -40,7 +39,7 @@ import { SelectedbillComponent } from './selectedbill/selectedbill.component';
         FlexLayoutModule, MdNativeDateModule, Ng2CompleterModule
     ],
     providers: [ FormService, QuestionControlService, QuestionService, LoggedService, 
-        OVERLAY_PROVIDERS, PatientService, UniversalService, VisitService 
+        OVERLAY_PROVIDERS, PatientService, UniversalService, VisitService , CashierserviceService
     ],
     declarations: [
         DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, 
@@ -49,7 +48,7 @@ import { SelectedbillComponent } from './selectedbill/selectedbill.component';
         SelectedbillComponent,
     ],
     exports: [
-        DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, PrintComponent,
+        DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent,
         QueueComponent, ConsultationComponent, PrescriptionComponent, AutoCompleteComponent,
         PrintComponent, PrintcomponentComponent, CashierComponent, SelectedbillComponent,
     ],

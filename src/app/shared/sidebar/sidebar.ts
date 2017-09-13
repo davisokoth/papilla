@@ -44,7 +44,6 @@ export class SidebarComponent {
       data => {
         this.orgmenus = data;
         for (let menu of this.orgmenus) {
-        console.log('Working...');
           if (menu.parentmenu == 0) {
             menu.navitems = [];
             for (let item of this.orgmenus) {
@@ -66,6 +65,9 @@ export class SidebarComponent {
     }
     if (menu.action === 'activity') {
       this.router.navigate([`/dashboard/queue`]);
+    }
+    if (menu.action === 'cashier') {
+      this.router.navigate([`/dashboard/cashier`]);
     }
   }
 }

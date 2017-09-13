@@ -5,7 +5,8 @@
     <table class="table table-striped table-hover">
       <tr><th>Patient</th><th>Visit</th><th>Amount</th></tr>
       <tr *ngFor="let x of myarr">
-        <td><a (click)="myEvent(x.b_billing_id)">{{x.lastname}}</a></td><td>{{x.visitno}}</td><td>{{x.amount}}</td>
+        <td><a class="normalize" (click)="myEvent(x.b_billing_id)">{{x.lastname}}</a></td>
+        <td>{{x.visitno}}</td><td>{{x.amount}}</td>
       </tr>
     </table>
   </div>

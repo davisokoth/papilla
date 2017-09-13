@@ -30,7 +30,7 @@ import { MenuService } from './services/menu.service';
     SignupModule,
     DashboardModule
   ],
-  providers: [ MenuService,CashierserviceService],
+  providers: [ MenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,7 +20,6 @@ export class SelectedbillComponent implements OnInit {
   }
 
   payBill(){
-  	this.isNotPaid = false;
   	let jsonObj = {
   			'createdby':1,
   			'updatedby':1,
@@ -29,19 +28,21 @@ export class SelectedbillComponent implements OnInit {
   			'c_facility_id': 1,
   			'b_paymode_id': 1,
   			'amount': this.amount,
+        'b_billing_id':1,
   			'ispayed': 'Y'
   		}
-  	this.cashService.postPayment(
-  		JSON.stringify(jsonObj)
-  	)
-  .subscribe(
-    data => {
-      console.log(data);
-    },
-    error => {
-      console.log(error);
-      console.log(jsonObj);
-    });
+  	this.cashService.postPayment(JSON.stringify(jsonObj))
+    .subscribe(
+      data => {
+        console.log(data);
+        this.isNotPaid = false;
+      },
+      error => {
+        alert('An error has occured!');
+        console.log(error);
+        console.log(jsonObj);
+      }
+    );
 }
 
 
