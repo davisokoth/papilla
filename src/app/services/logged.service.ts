@@ -23,6 +23,7 @@ export class LoggedService {
     localStorage.setItem('name', token.name);
     localStorage.setItem('ad_user_id', token.ad_user_id);
     localStorage.setItem('user', JSON.stringify(token));
+    console.log(localStorage.getItem('user'));
     this._loggedSubject.next(true);
   }
 

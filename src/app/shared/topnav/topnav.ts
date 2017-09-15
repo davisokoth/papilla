@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoggedService } from '../../services/logged.service';
@@ -10,7 +10,7 @@ declare var $: any;
     templateUrl: 'topnav.html',
 })
 
-export class TopNavComponent {
+export class TopNavComponent implements OnInit{
 
   title = 'KEMSA CDS';
   isLoggedIn = false;
@@ -24,8 +24,11 @@ export class TopNavComponent {
     private loggedService: LoggedService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.name = localStorage.getItem('name');
+  ) { }
+
+  ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'))[0];
+    console.log(this.user);
   }
 
   changeTheme(color: string): void {

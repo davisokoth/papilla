@@ -6,3 +6,16 @@
 #right-pane > li {
 	border-bottom: thin solid #00f;
 }
+
+#history {
+	background: #EBDEF0;
+}
+
+#patientinfo {
+	height: 35vh;
+	border-bottom: thin solid #fcc;
+}
+
+#medicalinfo {
+	height: 60vh;
+}

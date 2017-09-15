@@ -64,7 +64,12 @@ export class SidebarComponent {
       this.router.navigate([`/dashboard/dynamic/${menu.c_form_id}`]);
     }
     if (menu.action === 'activity') {
-      this.router.navigate([`/dashboard/queue`]);
+      // this.router.navigate([`/dashboard/queue`]);
+      this.router.navigate([menu.url]);
+    }
+    if (menu.action === 'custom') {
+      // this.router.navigate([`/dashboard/queue`]);
+      this.router.navigate([menu.url]);
     }
     if (menu.action === 'cashier') {
       this.router.navigate([`/dashboard/cashier`]);

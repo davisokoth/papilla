@@ -30,7 +30,13 @@ export class AppComponent {
     private route: ActivatedRoute,
     private router: Router,
     private mycashierservice:CashierserviceService
-  ) {
+  ) { }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  ngOnInit() {
     this.subscription = this.loggedService.isLoggedin().subscribe(isLoggedIn => {
       this.isLoggedIn = this.loggedService.logged;
       if (!this.isLoggedIn) {
@@ -42,11 +48,5 @@ export class AppComponent {
       }
     });
   }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  ngOnInit() {}
 
 }
