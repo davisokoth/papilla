@@ -12,3 +12,11 @@
 	-webkit-padding-start: 10px;
 	font-size: -2px;
 }
+
+.collapse {        
+      // display: block;       
+}
+
+.collapse.show {        
+      display: block;       
+}
