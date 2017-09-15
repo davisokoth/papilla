@@ -39,6 +39,7 @@ export class AuthenticationService {
         console.log(data);
         this.loggedService.login(this.token);
         this.logged = true;
+        
         this.ad_user_id = data.ad_user_id;
         this.username = data.name;
         this.token = data.token;

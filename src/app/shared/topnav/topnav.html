@@ -1,5 +1,6 @@
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
 	<div class="collapse navbar-toggleable-xs clearfix text-center">
+		<img src="" /> &nbsp;
 		<a class="navbar-brand" [routerLink]="['/dashboard','/home']">{{title}}</a>
 
 		<ul
@@ -96,9 +97,9 @@
 				</ul>
 			</li>
 			-->
-			<li class="dropdown nav-item" dropdown><a href="javascript:;"
+			<li *ngIf="user" class="dropdown nav-item" dropdown><a href="javascript:;"
 				id="single-button" class="nav-link dropdown-toggle" dropdownToggle>
-					<i class="fa fa-user"></i> {{name}} <b class="caret"></b>
+					<i class="fa fa-user"></i> {{user.name}} <b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu" aria-labelledby="single-button">
 					<li><a class="dropdown-item" href="javascript:;"><i

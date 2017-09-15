@@ -2,10 +2,10 @@ import { Component, OnInit, ViewEncapsulation, ViewContainerRef, Input } from '@
 import { Overlay, OverlayState, ComponentPortal } from '@angular/material';
 import { OverlayComponent } from '../shared/overlay/overlay.component';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { PatientService } from '../services/patient.service';
 import { VisitService } from '../services/visit.service';
 import { PatientVisitModel } from '../models/patientvisit';
 import { VitalsComponent } from '../vitals/vitals.component';
+import { DiagnosisComponent } from '../diagnosis/diagnosis.component';
 
 @Component({
   selector: 'app-consultation',
@@ -32,6 +32,7 @@ export class ConsultationComponent implements OnInit {
     this.visitService.getVisit(this.p_visit_id).subscribe(
       data => {
         this.patient = data[0];
+        console.log(this.patient);
         this.getHistory();
       },
       error => {

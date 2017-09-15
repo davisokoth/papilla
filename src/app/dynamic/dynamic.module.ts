@@ -26,12 +26,14 @@ import { AutoCompleteComponent } from '../auto-complete/auto-complete.component'
 import { ConsultationComponent } from '../consultation/consultation.component';
 import { PrescriptionComponent } from '../prescription/prescription.component';
 import { VitalsComponent } from '../vitals/vitals.component';
+import { DiagnosisComponent } from '../diagnosis/diagnosis.component';
 
 import { PrintComponent } from '../print/print.component';
 import { PrintcomponentComponent } from '../printcomponent/printcomponent.component';
 import { CashierComponent } from '../cashier/cashier.component';
-import {CashierserviceService} from '../services/cashierservice.service';
+import { CashierserviceService } from '../services/cashierservice.service';
 import { SelectedbillComponent } from '../selectedbill/selectedbill.component';
+import { DispensingComponent } from '../dispensing/dispensing.component';
 
 @NgModule({
     imports: [ 
@@ -45,7 +47,7 @@ import { SelectedbillComponent } from '../selectedbill/selectedbill.component';
         DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, 
         OverlayComponent, QueueComponent, ConsultationComponent, PrescriptionComponent,
         AutoCompleteComponent, PrintComponent, PrintcomponentComponent, CashierComponent,
-        SelectedbillComponent,
+        SelectedbillComponent, DiagnosisComponent, DispensingComponent
     ],
     exports: [
         DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent,
