@@ -1,0 +1,314 @@
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  $( function() {
+    $.widget( "custom.dropdown", {
+      _create: function() {
+        this.wrapper = $( "<span>" )
+          .addClass( "custom-dropdown" )
+          .insertAfter( this.element );
+ 
+        this.element.hide();
+        this._createAutocomplete();
+        this._createShowAllButton();
+      },
+ 
+      _createAutocomplete: function() {
+        var selected = this.element.children( ":selected" ),
+          value = selected.val() ? selected.text() : "";
+ 
+        this.input = $( "<input>" )
+          .appendTo( this.wrapper )
+          .val( value )
+          .attr( "title", "" )
+          .addClass( "custom-dropdown-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .autocomplete({
+            delay: 0,
+            minLength: 0,
+            source: $.proxy( this, "_source" )
+          })
+          .tooltip({
+            classes: {
+              "ui-tooltip": "ui-state-highlight"
+            }
+          });
+ 
+        this._on( this.input, {
+          autocompleteselect: function( event, ui ) {
+            ui.item.option.selected = true;
+            this._trigger( "select", event, {
+              item: ui.item.option
+            });
+          },
+ 
+          autocompletechange: "_removeIfInvalid"
+        });
+      },
+ 
+      _createShowAllButton: function() {
+        var input = this.input,
+          wasOpen = false;
+ 
+        $( "<a>" )
+          .attr( "tabIndex", -1 )
+          .attr( "title", "Show All Items" )
+          .tooltip()
+          .appendTo( this.wrapper )
+          .button({
+            icons: {
+              primary: "ui-icon-triangle-1-s"
+            },
+            text: false
+          })
+          .removeClass( "ui-corner-all" )
+          .addClass( "custom-dropdown-toggle ui-corner-right" )
+          .on( "mousedown", function() {
+            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+          })
+          .on( "click", function() {
+            input.trigger( "focus" );
+ 
+            // Close if already visible
+            if ( wasOpen ) {
+              return;
+            }
+ 
+            // Pass empty string as value to search for, displaying all results
+            input.autocomplete( "search", "" );
+          });
+      },
+ 
+      _source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( this.element.children( "option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text,
+              value: text,
+              option: this
+            };
+        }) );
+        CreateTableFromJSON(this.value);
+      },
+ 
+      _removeIfInvalid: function( event, ui ) {
+ 
+        // Selected an item, nothing to do
+        if ( ui.item ) {
+          return;
+        }
+ 
+        // Search for a match (case-insensitive)
+        var value = this.input.val(),
+          valueLowerCase = value.toLowerCase(),
+          valid = false;
+        this.element.children( "option" ).each(function() {
+          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+            this.selected = valid = true;
+            return false;
+          }
+        });
+ 
+        // Found a match, nothing to do
+        if ( valid ) {
+          return;
+        }
+ 
+        // Remove invalid value
+        this.input
+          .val( "" )
+          .attr( "title", value + " didn't match any item" )
+          .tooltip( "open" );
+        this.element.val( "" );
+        this._delay(function() {
+          this.input.tooltip( "close" ).attr( "title", "" );
+        }, 2500 );
+        this.input.autocomplete( "instance" ).term = "";
+      },
+ 
+      _destroy: function() {
+        this.wrapper.remove();
+        this.element.show();
+      }
+    });
+ 
+    $( "#dropdown" ).dropdown();
+    $( "#toggle" ).on( "click", function() {
+      $( "#dropdown" ).toggle();
+    });
+  } );
+  </script>
+<script>
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//Updating Stocks
+function F_Reduce_Stock(json){
+  var data = "p_prescription_id="+ json["p_prescription_id"] +"";
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open("POST", "http://197.248.10.20:3000/api/p_prescription_dispensed/updatestock/");
+  xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+  xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.setRequestHeader("postman-token", "8567b3c8-0324-3dae-eb20-757182d48a28");
+
+  xhr.send(data);
+  //alert (data);
+}
+
+// Sending and receiving data in JSON format using POST/PUT mothod
+function F_Post_Prescription_Dispensed(json){
+  xhr = new XMLHttpRequest();
+  var url = "http://197.248.10.20:3000/api/p_prescription_dispensed";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onreadystatechange = function () { 
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          var json = JSON.parse(xhr.responseText);
+          console.log(json)
+          F_Reduce_Stock(json)
+      }
+  }
+  var data = JSON.stringify(json);
+  xhr.send(data);
+  //alert (data);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function F_Update_Prescription(prescriptionid){
+  xhr = new XMLHttpRequest();
+  var url = "http://197.248.10.20:3000/api/p_prescriptions/"+prescriptionid;
+  xhr.open("PUT", url, true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onreadystatechange = function () { 
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          var json = JSON.parse(xhr.responseText);
+          console.log(json)
+          F_Post_Prescription_Dispensed(json)      
+      }
+  }
+  var data = JSON.stringify({
+    "isdispensed": "Y",
+  });
+  xhr.send(data);
+  //Refresh Prescription Lines in a table
+  //CreateTableFromJSON(prescriptionid);
+    CreateTableFromJSON();
+  //alert (data);
+  //location.reload();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//GET Prescriptions and put them in a select box
+$.getJSON('http://197.248.10.20:3000/api/v_prescriptions', function (json) {
+      var json_obj = json;
+      console.log(json_obj);
+            var response = json_obj ;
+            $('#dropdown').find('option').remove(); 
+            $.each(response,function(key, value){
+                $('#dropdown').append('<option value=' + value.prescriptionid + '>' + value.visitno + '</option>');
+            });
+      }
+  )
+
+//Display Prescription Lines in a table
+function CreateTableFromJSON(prescriptionid) {
+  //Refresh Prescription Lines in a table
+  $('#showData').load(document.URL +  ' #showData');
+  if (typeof prescriptionid != 'undefined') {
+    url_end = "?filter[where][prescriptionid]=" + prescriptionid + "";
+  }
+  else {
+    url_end = "";
+  }
+  //alert (url_end);
+    $.getJSON('http://197.248.10.20:3000/api/v_prescriptions'+ url_end + '', function (prescriptionjson) {
+    var prescription = prescriptionjson;
+    
+    // EXTRACT VALUE FOR HTML HEADER. 
+    var col = [];
+    for (var i = 0; i < prescription.length; i++) {
+      for (var key in prescription[i]) {
+        if (col.indexOf(key) === -1) {
+          col.push(key);
+        }
+      }
+    }
+
+    // CREATE DYNAMIC TABLE.
+    var table = document.createElement("table");
+    //Table properties
+    table.setAttribute("class", "display table table-bordered table-condensed table-striped table-hover table-border table-responsive dataTable ");
+
+    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+    var tr = table.insertRow(-1);                   // TABLE ROW.
+
+    for (var i = 0; i < col.length; i++) {
+      var th = document.createElement("th");      // TABLE HEADER.
+      th.innerHTML = col[i];
+      if (i < 8)
+      {
+        tr.appendChild(th);
+      }
+    }
+      var th = document.createElement("th");      // TABLE HEADER.
+      th.innerHTML = "Action";
+      tr.appendChild(th);
+
+    // ADD JSON DATA TO THE TABLE AS ROWS.
+    
+    for (var i = 0; i < prescription.length; i++) {
+      tr = table.insertRow(-1);
+      for (var j = 0; j < col.length; j++) {
+        if (j < 8)
+        {
+          var tabCell = tr.insertCell(-1);
+          tabCell.innerHTML = prescription[i][col[j]];
+        }
+        if (j == 6)
+        {
+          tabCell.innerHTML = "<input type='text' name='quantity' onKeyPress='edValueKeyPress()' onKeyUp='edValueKeyPress()' value="+ prescription[i][col[6]] +">";
+        }
+      }
+        var tabCell = tr.insertCell(-1);
+
+        prescriptionid = prescription[i][col[10]];
+        tabCell.innerHTML = "<input onclick='F_Update_Prescription("+prescriptionid +")' class='btn btn-success btn-md' type='submit' value='Dispense'>";
+        console.log (prescriptionid);
+    }
+
+    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+    var divContainer = document.getElementById("showData");
+    divContainer.innerHTML = "";
+    divContainer.appendChild(table);
+  }
+  )
+}
+
+</script>
+
+<!--Prescription: <!--select id="dropdown" onchange="CreateTableFromJSON(this.value)"></select-->
+<!--select id="dropdown" onchange="CreateTableFromJSON(this.value)">
+  </select-->
+<br>
+<br>
+<div id="showData" class="container"></div>
+
+<script>
+CreateTableFromJSON();
+</script>

@@ -1,3 +1,31 @@
-<p>
-  dispensing works!
-</p>
+<div class="alert alert-info"><!--*ngIf="viewBookings"-->
+  <strong>Dispensing</strong>
+</div>
+<div class="table-responsive"><!-- *ngIf="viewBookings"-->
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Pharmacy Name</th>
+              <th>Visit No</th>
+              <th>Patient Name</th>
+              <th>Product Name</th>
+              <th>Dosage</th>
+              <th>Qty On Hand</th>
+              <th>Qty to Dispense</th>
+              <th>dispensed</th>
+          </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let prescription of prescriptionsobj">
+          <td contenteditable='true' #bookingname [id]="">{{ prescription.pharmacy_name }}</td>
+          <td contenteditable='true'>{{ prescription.visitno }}</td>
+          <td contenteditable='true'>{{ prescription.patientname }}</td>
+          <td contenteditable='true'> {{ prescription.productname }}</td>
+          <td contenteditable='true'> {{ prescription.dosage }}</td>
+          <td contenteditable='true'> {{ prescription.onhandqty }}</td>
+          <td contenteditable='true'> {{ prescription.dispenseqty }}</td>
+          <td contenteditable='true'> {{ prescription.dispensed }}</td>
+      </tr>
+      </tbody>
+  </table>
+</div>
