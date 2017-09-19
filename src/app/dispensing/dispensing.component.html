@@ -1,6 +1,5 @@
-<div class="alert alert-info"><!--*ngIf="viewBookings"-->
-  <strong>Dispensing</strong>
-</div>
+<div class="{{messageclass}}"><strong>{{message}}</strong></div>
+
 <div class="table-responsive"><!-- *ngIf="viewBookings"-->
   <table class="table table-striped">
       <thead>
@@ -12,8 +11,9 @@
               <th>Dosage</th>
               <th>Qty On Hand</th>
               <th>Qty to Dispense</th>
-              <th>dispensed</th>
-          </tr>
+              <th>Dispensed</th>
+              <th>Action</th>
+            </tr>
       </thead>
       <tbody>
       <tr *ngFor="let prescription of prescriptionsobj">
@@ -25,7 +25,10 @@
           <td contenteditable='true'> {{ prescription.onhandqty }}</td>
           <td contenteditable='true'> {{ prescription.dispenseqty }}</td>
           <td contenteditable='true'> {{ prescription.dispensed }}</td>
-      </tr>
+          <td> 
+            <button type="button" #prescriptionid class="btn btn-primary" (click)="Dispense(prescription.prescriptionid)" [id]="prescription.prescriptionid">Dispense</button>
+            </td>
+        </tr>
       </tbody>
   </table>
 </div>
