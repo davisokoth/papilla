@@ -25,11 +25,13 @@
 				<app-vitals [p_visit_id]="p_visit_id"></app-vitals>
 	   		</md-tab>
 	   		<md-tab label="DIAGNOSIS">
-	   			<app-diagnosis></app-diagnosis>
+	   			<app-diagnosis [p_visit_id]="p_visit_id"></app-diagnosis>
 	   		</md-tab>
+			<!--
 			<md-tab label="SERVICES">
 				<button class="btn btn-default" (click)="openRotiniPanel()">Add</button>
 			</md-tab>
+			-->
 			<md-tab label="TREATMENT">
 				<app-prescription [p_visit_id]="p_visit_id" [c_patient_id]="patient.c_patient_id">
 				</app-prescription>
