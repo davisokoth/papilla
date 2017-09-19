@@ -17,6 +17,7 @@ export class AutoCompleteComponent {
   @Input() label: string;
   @Input() datasource: string;
   @Input() primarykey: string;
+  @Input() minSearchLength: number;
 
   @Output() emitProduct: EventEmitter<any> = new EventEmitter<any>();
 
@@ -30,11 +31,12 @@ export class AutoCompleteComponent {
   dataService: CompleterData;
 
    constructor(private uService: UniversalService, private completerService: CompleterService) {
-     // this.dataService = completerService.local(this.searchData, 'color', 'color');
      console.log(this.label);
    }
 
    ngOnInit() {
+     if(this.minSearchLength === undefined)
+      this.minSearchLength = 3;
      this.getData();
    }
 
