@@ -37,8 +37,11 @@ export class LoginComponent {
     this.authenticationService.login(this.user.name, this.user.password)
       .subscribe(
         data => {
-          console.log('Login Successful!!');
-          this.router.navigate([this.returnUrl]);
+          if(data !== 'failed'){
+            this.router.navigate([this.returnUrl]);
+          } else {
+            alert('Login failed!');
+          }
         },
         error => {
           console.log('Login Error!');
