@@ -1,5 +1,5 @@
 import { Injectable }       from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { URL } from '../globals';
 // import { VisitModel } from '../models/visit';
@@ -34,6 +34,22 @@ export class VisitService {
       .get(`${this.url}v_patientvisits?filter[where][p_visit_id]=${p_visit_id}`)
       .map(response => response.json().map(this.toModel));
     return visit$;
+  }
+
+  setVisitStatus(p_visit_id: number, status: string) {
+    return this.http.post(this.url + 'p_visits/setstatus', 
+      {
+        p_visit_id: p_visit_id,
+        status: status
+      }, 
+      {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }
+    ).map((res: any) => {
+      const data = res.json();
+    });
   }
 
   toModel (r: any): PatientVisitModel {

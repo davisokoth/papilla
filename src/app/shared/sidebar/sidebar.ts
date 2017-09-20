@@ -65,7 +65,7 @@ export class SidebarComponent {
     }
     if (menu.action === 'activity') {
       // this.router.navigate([`/dashboard/queue`]);
-      this.router.navigate([menu.url]);
+      this.router.navigate([menu.url, menu.record_id]);
     }
     if (menu.action === 'custom') {
       // this.router.navigate([`/dashboard/queue`]);
