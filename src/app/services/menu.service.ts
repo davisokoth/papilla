@@ -16,7 +16,7 @@ export class MenuService {
   getMenus(c_user_id: number): Observable<any[]> {
 
     const menus$ = this.http
-      .get(`${this.url}v_usermenus?filter[where][c_user_id]=11`)
+      .get(`${this.url}v_usermenus?filter[where][c_user_id]=${c_user_id}`)
       // .get(`${this.url}v_usermenus`)
       .map(response => response.json());
       return menus$;

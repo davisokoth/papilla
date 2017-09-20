@@ -44,7 +44,6 @@ export class AutoCompleteComponent {
   public selected(selected: any) {
       if(selected){
         this.emitProduct.emit(selected.originalObject);
-        console.log(this.primarykey + ': ' + selected.originalObject[this.primarykey]);
         this.getData();
       }
    }
