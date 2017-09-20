@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuModel } from '../../models/menu';
@@ -10,7 +10,7 @@ import { MenuService } from '../../services/menu.service';
   styleUrls: [ 'sidebar.css' ]
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
   menus: MenuModel[] = [];
   orgmenus: MenuModel[] = [];
@@ -24,6 +24,10 @@ export class SidebarComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    
+  }
+
+  ngOnInit() {
     this.getMenus();
   }
 
@@ -40,8 +44,10 @@ export class SidebarComponent {
   }
 
   getMenus() {
-    this.menuService.getMenus().subscribe(
+    let c_user_id = JSON.parse(localStorage.getItem('user')).c_user_id;
+    this.menuService.getMenus(c_user_id).subscribe(
       data => {
+        console.log(data);
         this.orgmenus = data;
         for (let menu of this.orgmenus) {
           if (menu.parentmenu == 0) {
@@ -55,7 +61,10 @@ export class SidebarComponent {
           }
         }
       },
-      err => { this.error = true; }
+      err => { 
+        this.error = true; 
+        console.log(err);
+      }
     );
   }
 

@@ -8,7 +8,6 @@ import { DispensingComponent } from '../dispensing/dispensing.component'
 export const DynamicRoutes: Routes = [
   { path: 'dynamic/:c_form_id', component: DynamicComponent },
   { path: 'consultation/:p_visit_id', component: ConsultationComponent },
-  // { path: 'cashier', component: ConsultationComponent },
   { path: 'queue/:id', component: QueueComponent },
   { path: 'dispensing', component: DispensingComponent },
   { path: 'cashier', component: CashierComponent }
