@@ -47,7 +47,6 @@ export class SidebarComponent implements OnInit{
     let c_user_id = JSON.parse(localStorage.getItem('user')).c_user_id;
     this.menuService.getMenus(c_user_id).subscribe(
       data => {
-        console.log(data);
         this.orgmenus = data;
         for (let menu of this.orgmenus) {
           if (menu.parentmenu == 0) {
