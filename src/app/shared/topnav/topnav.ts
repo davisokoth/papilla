@@ -28,7 +28,6 @@ export class TopNavComponent implements OnInit{
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'))[0];
-    console.log(this.user);
   }
 
   changeTheme(color: string): void {
