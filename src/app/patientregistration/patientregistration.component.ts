@@ -24,6 +24,7 @@ export class PatientregistrationComponent implements OnInit {
   viewRegisteredPatients: any;
   viewRegisteredPatientDetails: any;
   formPatientregistrationinfo: any;
+  viewForm: any;
   constructor(
     private http: Http,
     private route: ActivatedRoute,
@@ -33,8 +34,9 @@ export class PatientregistrationComponent implements OnInit {
   ngOnInit() {
     this.message ="Patient Registration";
     this.messageclass = "alert alert-info";
-    this.viewRegisteredPatients = true
+    this.viewRegisteredPatients = true;
     this.viewRegisteredPatientDetails = false;
+    this.viewForm = false;
     this.displayRegisteredPatients().subscribe(data=>{
       this.registeredpatientsobj = data;
       console.log(data);
