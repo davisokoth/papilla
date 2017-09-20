@@ -19,6 +19,8 @@ export class DispensingComponent implements OnInit {
   prescriptionsobj: any;
   messageclass: any;
   message: any;
+  user: any;
+  user_id: any;
   
   constructor(
     private http: Http,
@@ -32,6 +34,8 @@ export class DispensingComponent implements OnInit {
     this.displayPrescriptions().subscribe(data=>{
       this.prescriptionsobj = data;
     });
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user_id = this.user[0].c_user_id;
   }
 
   displayPrescriptions(){
@@ -75,8 +79,13 @@ Dispense(prescriptionid){
 }
 
   F_Update_Prescription(prescriptionid){
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;
+    let updated = dateTime;
     console.log("F_Update_Prescription  " + prescriptionid);
-    const data2 = this.http.put(this.url+`p_prescriptions/`+prescriptionid, {isdispensed:"Y"})
+    const data2 = this.http.put(this.url+`p_prescriptions/`+prescriptionid, {isdispensed:"Y", updatedby: this.user_id, updated: updated})
     .map(response => response.json());
     return data2;
   }
