@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import { Http, Headers, Response } from '@angular/http';
 import {URL} from '../globals';
 import 'rxjs/add/operator/map';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 
@@ -14,11 +15,16 @@ import 'rxjs/add/operator/map';
 })
 
 export class DispensingComponent implements OnInit {
+  url = URL;
   prescriptionsobj: any;
   messageclass: any;
   message: any;
   
-  constructor(private http: Http) {}
+  constructor(
+    private http: Http,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   
   ngOnInit() {
     this.message ="Dispensing";
@@ -31,7 +37,7 @@ export class DispensingComponent implements OnInit {
 
   displayPrescriptions(){
     const data = this.http
-    .get(`http://197.248.10.20:3000/api/v_prescriptions`)
+    .get(this.url+`v_prescriptions?filter[where][dispensed]=N`)
     .map(response => response.json());
     return data;
   }
@@ -51,6 +57,10 @@ Dispense(prescriptionid){
         //console.log("F_Reduce_Stock" + JSON.stringify(data3));
         this.message ="Stock Reduced";
         this.messageclass = "alert alert-success";
+        this.displayPrescriptions().subscribe(data=>{
+          this.prescriptionsobj = data;
+          //console.log("displayPrescriptions - subscribe" + JSON.stringify(data));
+        });
       },
       error => {
         this.message ="Could Not Reduce Stock";
@@ -69,15 +79,12 @@ Dispense(prescriptionid){
     this.messageclass = "alert alert-danger";
     return false;
   });
-  location.reload();  
+ //this.router.navigate(['/dispensing']);
 }
-
-
-
 
   F_Update_Prescription(prescriptionid){
     console.log("F_Update_Prescription  " + prescriptionid);
-    const data2 = this.http.put(`http://197.248.10.20:3000/api/p_prescriptions/`+prescriptionid, {isdispensed:"Y"})
+    const data2 = this.http.put(this.url+`p_prescriptions/`+prescriptionid, {isdispensed:"Y"})
     .map(response => response.json());
     return data2;
   }
@@ -85,14 +92,14 @@ Dispense(prescriptionid){
 
   F_Post_Prescription_Dispensed(json){
     console.log("F_Post_Prescription_Dispensed " + json);
-    const data3 = this.http.post(`http://197.248.10.20:3000/api/p_prescription_dispensed`, json)
+    const data3 = this.http.post(this.url+`p_prescription_dispensed`, json)
     .map(response => response.json());
     return data3;
   }
 
   F_Reduce_Stock(json){
     //alert("F_Reduce_Stock" + json);
-    const data4 = this.http.post(`http://197.248.10.20:3000/api/p_prescription_dispensed/updatestock/`, {p_prescription_id: json['p_prescription_id']})
+    const data4 = this.http.post(this.url+`p_prescription_dispensed/updatestock/`, {p_prescription_id: json['p_prescription_id']})
     .map(response => response.json());
     return data4;
     }
