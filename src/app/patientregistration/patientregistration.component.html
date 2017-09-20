@@ -1,0 +1,150 @@
+<div class="container">
+  
+      <div class={{messageclass}}>
+          <strong>{{message}}</strong>
+      </div>
+  
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <div *ngIf="viewForm">
+                    <form (ngSubmit)="submitBookingForm()" #f="ngForm" novalidate>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="name">First Name</label>
+                                  <input type="text" class="form-control" id="firstname"                                  required [(ngModel)]="formPatientregistrationinfo.firstname"                           name="firstname">
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="name">Middle Name</label>
+                            <input type="text" class="form-control" id="middlename" required [(ngModel)]="formPatientregistrationinfo.middlename" name="middlename">
+                            </div>
+                          </div>
+                      </div>
+  
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                    <label for="name">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname"                                  required [(ngModel)]="formPatientregistrationinfo.lastname"                           name="lastname">
+                                </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="dob">Date of birth</label>
+                                  <input type="date" class="form-control"[(ngModel)]="formPatientregistrationinfo.dob" name="dob">
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <button type="submit" class="btn btn-primary">Create</button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+  
+              <div class="alert alert-info" *ngIf="viewRegisteredPatients">
+                  <strong>Registered Patients</strong>
+              </div>
+              <div class="table-responsive" *ngIf="viewRegisteredPatients">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>Patient Name</th>
+                              <th>ID Type</th>
+                              <th>ID Number</th>
+                              <th>DOB</th>
+                              <th>Gender</th>
+                              <th>NHIF No</th>
+                              <th>Town</th>
+                              <th>View</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let registeredpatient of registeredpatientsobj">
+                          <td contenteditable='true' #firstname [id]="">{{ registeredpatient.firstname }} {{ registeredpatient.middlename }} {{ registeredpatient.lastname }}</td>
+                          <td contenteditable='true'>{{ registeredpatient.idtype }}</td>
+                          <td contenteditable='true'>{{ registeredpatient.idnumber }}</td>
+                          <td contenteditable='true'> {{ registeredpatient.dob }}</td>
+                          <td contenteditable='true'> {{ registeredpatient.gender }}</td>
+                          <td contenteditable='true'> {{ registeredpatient.nhifno }}</td>
+                          <td contenteditable='true'> {{ registeredpatient.town }}</td>
+                          <td> 
+                          <button type="button" #c_patient_id class="btn btn-info" (click)="viewRegisteredPatients(registeredpatient.c_patient_id,registeredpatient.firstname)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">View</button>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+  
+  <!---------------------------------------------------viewbookingdetails---------------------------------------------------------------->     
+          <div *ngIf="viewRegisteredPatientDetails">
+  
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <button type="button" #lmis_facilityreport_id class="btn btn-success btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Approve</button>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <button type="button" #lmis_facilityreport_id class="btn btn-success btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Proforma</button>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                              <button type="button" #lmis_facilityreport_id class="btn btn-success btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Submit to KEMSA</button>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <button type="button" #lmis_facilityreport_id class="btn btn-danger btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Reject</button>
+                      </div>
+                  </div>
+              </div>
+  
+              <div>
+  
+                  <div class="alert alert-info">
+                      <strong>Facility Orders in this Booking Period</strong>
+                  </div>
+  
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th>MFL</th>
+                                  <th>Facility</th>
+                                  <th>Status</th>
+                                  <th>View</th>
+                                  <th>Reject</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let bookingorder of bookingordersobj">
+                                  <td contenteditable='true'> {{ bookingorder.facilitycode }}</td>
+                                  <td contenteditable='true'> {{ bookingorder.facility }}</td>
+                                  <td contenteditable='true'> {{ bookingorder.docstatus }}</td>
+                                  <td> 
+                                  <button type="button" #lmis_facilityreport_id class="btn btn-info" (click)="viewFacilityOrder(lmis_facilityreport_id.id,facilityorders.name)" [id]="bookingorder.lmis_facilityreport_id" [value]="bookingorder.facilityordername">View</button> 
+                                  </td>
+                                  <td>
+                                  <button type="button" #lmis_facilityreport_id class="btn btn-danger" (click)="rejectFacilityOrder(lmis_facilityreport_id.id)" [id]="bookingorder.lmis_facilityreport_id">Reject</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <button type="button" class="btn btn-danger" (click)="closeViewbooking()">Close</button>
+          </div>
+      </div>
+  </div>
