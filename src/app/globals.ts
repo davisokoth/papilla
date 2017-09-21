@@ -1,5 +1,8 @@
-export const URL = 'http://197.248.10.20:3000/api/';
-export const version = '22.2.2';
+
+import { environment } from '../environments/environment';
+
+export const URL = environment.URL;
+export const version = '0';
 export const logged = false;
 export let username: string;
 export let lToken: string;
