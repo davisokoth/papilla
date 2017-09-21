@@ -18,6 +18,7 @@ import { MyprintComponent } from './myprint/myprint.component';
 import { SelectComponent } from './select/select.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextComponent } from './text/text.component';
+import { SelectedbillComponent } from './selectedbill/selectedbill.component';
 
 import { MenuService } from './services/menu.service';
 
@@ -29,7 +30,7 @@ import { MenuService } from './services/menu.service';
     BrowserAnimationsModule, BrowserModule, DynamicModule, FormsModule, HttpModule, ReactiveFormsModule,
     RouterModule.forRoot(routes), LoginModule, SignupModule, DashboardModule
   ],
-  providers: [ MenuService],
+  providers: [ MenuService,SelectedbillComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

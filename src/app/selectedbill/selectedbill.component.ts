@@ -1,74 +1,217 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {CashierserviceService} from '../services/cashierservice.service';
+import {Http,Response} from '@angular/http';
 
 @Component({
   selector: 'app-selectedbill',
   templateUrl: './selectedbill.component.html',
   styleUrls: ['./selectedbill.component.css']
 })
+
 export class SelectedbillComponent implements OnInit {
 
+  private myurl="http://197.248.10.20:3000/api/b_paymodes";
+  data = [];
+  myarr=[];
+
   @Input() item: any[];
-  amount: number;
+  amount: number=0;
+  paymentmethod:any;
   isNotPaid = true;
   isNotPrinted = true; 
   name:string;
 
-  constructor(private cashService: CashierserviceService) { }
+  constructor(private cashService: CashierserviceService, private http:Http) {
+
+   this.getPlaces();
+
+   }
 
   ngOnInit() {
+    console.log(this.item);
+
   }
 
-  payBill(){
-  	let jsonObj = {
-  			'createdby':1,
-  			'updatedby':1,
-  			'documentno': 'TEST',
-  			'c_patient_id': 12,
-  			'c_facility_id': 1,
-  			'b_paymode_id': 1,
-  			'amount': this.amount,
-        'b_billing_id':1,
-  			'ispayed': 'Y'
-  		}
-  	this.cashService.postPayment(JSON.stringify(jsonObj))
+  getPaymentValue(){
+
+  return this.paymentmethod;
+
+  }
+
+
+  getData(){
+
+  return this.http.get(this.myurl).map((res:Response)=>res.json())
+  }
+
+  getPlaces(){
+
+  this.getData().subscribe(data=>{
+
+  this.data=data
+  })
+  }
+
+payBill(){
+
+ this.getPaymentValue();
+ console.log(this.item);
+ var myitems=this.item;
+ var totalValue=0;
+
+ for (var j = 0; j < myitems.length; j++){
+ totalValue=totalValue+(Number(myitems[j].amount));
+  console.log(myitems[j].amount);
+}
+
+console.log(totalValue);
+console.log(this.amount);
+
+
+if(this.amount<totalValue){
+
+   this.checkAmount();
+
+
+}
+else if(this.getPaymentValue()==""){
+  
+  alert("please choose payment method");
+}
+else{
+
+
+  console.log("document no:"+this.item[0].documentno+" patient id "+this.item[0].c_patient_id);
+  
+  let jsonObj = {
+        'createdby':1,
+        'updatedby':1,
+        'documentno': 1,
+        'c_patient_id': this.item[0].c_patient_id,
+        'c_facility_id': this.item[0].c_facility_id,
+        'b_paymode_id': this.getPaymentValue(),
+        'amount': this.amount,
+        'b_billing_id':this.item[0].b_billing_id,
+        'ispayed': 'Y'
+      }
+    this.cashService.postPayment(JSON.stringify(jsonObj))
     .subscribe(
       data => {
         console.log(data);
         this.isNotPaid = false;
+
+
+        this.cashService.updateBill(this.item[0].b_billing_id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.item[0].ispayed = 'Y';
+      },
+      error => {
+        alert('An error has occured updating bill');
+        console.log('error ocured updating bill');
+        
+      }
+    );
+
+
+
       },
       error => {
         alert('An error has occured!');
         console.log(error);
         console.log(jsonObj);
       }
+    ); 
+
+
+
+
+    
+    this.print();
+
+      this.cashService.getBills().subscribe(
+      data => {
+
+          this.myarr = data;
+          console.log(this.myarr);
+          
+        }
     );
+
+
 }
 
 
+}
+
+
+refresh(): void {
+       
+
+}
+
+
+checkAmount(){
+
+  console.log("Make full Payment to proceed");
+  alert("Make full Payment to proceed");
+
+}
+
+print(){
+
+ console.log(this.item);
+ var myitems=this.item;
+ var totalValue=0;
+ var mybalance=0;
+ var custName="";
+ custName=myitems[0].lastname;
+ 
+
+for (var j = 0; j < myitems.length; j++){
+ totalValue=totalValue+(Number(myitems[j].amount));
+  console.log(myitems[j].amount);
+}
+
+console.log(totalValue);
+
+mybalance=this.amount-totalValue;
+
+
+
   
+  this.isNotPaid = true;
 
-  print(name:string): void {
+    let payedValue,balance,amount,printContents,theCustomer, popupWin;
+    
+    payedValue=this.amount;
+    amount=totalValue;
+    balance=mybalance;    
+    theCustomer=custName;
 
-  	this.isNotPaid = true;
-
-    let printContents, popupWin;
-    this.name=name;
-    printContents =this.name;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=auto,width=auto');
     popupWin.document.open();
     popupWin.document.write(`
       <html>
         <head>
-          <title>Bill Receipt</title>
+          <title>Bill Receipt Kajiado District Hospital </title>
           <style>
           
           </style>
         </head>
-    <body onload="window.print();window.close()">${printContents}</body>
+    <body onload="window.print();window.close()">
+    <p>CUSTOMER: ${theCustomer}</p>
+    <p>TOTAL AMOUNT: ${amount}</p>
+    <p>AMOUNT PAID: ${payedValue}</p>
+    <p>BALANCE: ${balance}</p>
+
+    </body>
       </html>`
     );
     popupWin.document.close();
+
+ 
 }
 
 
