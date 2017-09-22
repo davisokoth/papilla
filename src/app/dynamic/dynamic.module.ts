@@ -34,6 +34,7 @@ import { CashierComponent } from '../cashier/cashier.component';
 import { CashierserviceService } from '../services/cashierservice.service';
 import { SelectedbillComponent } from '../selectedbill/selectedbill.component';
 import { DispensingComponent } from '../dispensing/dispensing.component';
+import { PatientregistrationComponent } from '../patientregistration/patientregistration.component';
 
 @NgModule({
     imports: [ 
@@ -47,7 +48,7 @@ import { DispensingComponent } from '../dispensing/dispensing.component';
         DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent, 
         OverlayComponent, QueueComponent, ConsultationComponent, PrescriptionComponent,
         AutoCompleteComponent, PrintComponent, PrintcomponentComponent, CashierComponent,
-        SelectedbillComponent, DiagnosisComponent, DispensingComponent
+        SelectedbillComponent, DiagnosisComponent, DispensingComponent, PatientregistrationComponent
     ],
     exports: [
         DynamicComponent, DynaformComponent, FormElementComponent, VitalsComponent,

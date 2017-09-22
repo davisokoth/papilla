@@ -1,0 +1,285 @@
+<div class="container">
+  
+      <div class={{messageclass}}>
+          <strong>{{message}}</strong>
+      </div>
+      <input (keyup)="searchPatient($event)" id="myInput" title="Type in a name" placeholder="Search for Patient names, code or phone number" *ngIf="search">
+      <!--p>{{mysearch}}</p-->
+      <div *ngIf="RegisterNew"><button type="button" class="btn btn-primary" (click)="FRegisterNew()">New</button></div>
+
+
+
+
+
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <div *ngIf="viewForm">
+                    <form (ngSubmit)="SubmitForm()" #f="ngForm" novalidate>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="name">First Name</label>
+                                  <input type="text" class="form-control" id="firstname"                                  required [(ngModel)]="formPatientregistrationinfo.firstname"                           name="firstname">
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="name">Middle Name</label>
+                            <input type="text" class="form-control" id="middlename" required [(ngModel)]="formPatientregistrationinfo.middlename" name="middlename">
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <label for="name">Last Name</label>
+                                        <input type="text" class="form-control" id="lastname"                                  required [(ngModel)]="formPatientregistrationinfo.lastname"                           name="lastname">
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                    <label for="dob">Date of birth</label>
+                                    <input type="date" class="form-control"[(ngModel)]="formPatientregistrationinfo.dob" name="dob">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="idtype">ID Type</label>
+                                            <input type="text" class="form-control" id="idtype"                                  required [(ngModel)]="formPatientregistrationinfo.idtype"                           name="idtype">
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                        <label for="idnumber">ID Number</label>
+                                        <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.idnumber" name="idnumber">
+                                    </div>
+                                </div>
+                            </div>
+    
+
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <label for="gender">Gender</label>
+                                                <input type="text" class="form-control" id="gender"                                  required [(ngModel)]="formPatientregistrationinfo.gender"                           name="gender">
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                            <label for="maritalstatus">Marital Status</label>
+                                            <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.maritalstatus" name="maritalstatus">
+                                        </div>
+                                    </div>
+                                </div>
+    
+
+                                <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="text" class="form-control" id="email"                                  required [(ngModel)]="formPatientregistrationinfo.email"                           name="email">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                                <label for="c_location_id">Location</label>
+                                                <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.c_location_id" name="c_location_id">
+                                            </div>
+                                        </div>
+                                    </div>
+    
+
+                                    <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="nhifno">NHIF No.</label>
+                                                        <input type="text" class="form-control" id="nhifno"                                  required [(ngModel)]="formPatientregistrationinfo.email"                           name="nhifno">
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                    <label for="occupation">Occupation</label>
+                                                    <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.occupation" name="occupation">
+                                                </div>
+                                            </div>
+                                        </div>
+    
+
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                            <label for="nhifno">Phone No</label>
+                                                            <input type="text" class="form-control" id="phoneno"                                  required [(ngModel)]="formPatientregistrationinfo.email"                           name="phoneno">
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                        <label for="phoneno2">Phone No 2</label>
+                                                        <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.phoneno2" name="phoneno2">
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+
+
+                                            <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                                <label for="physicaladdress">Physical Address</label>
+                                                                <input type="text" class="form-control" id="physicaladdress"                                  required [(ngModel)]="formPatientregistrationinfo.physicaladdress"                           name="physicaladdress">
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                      <div class="form-group">
+                                                            <label for="postaladdress">Postal Address</label>
+                                                            <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.postaladdress" name="postaladdress">
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+
+                                                <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <label for="postalcode">Postal Code</label>
+                                                                    <input type="text" class="form-control" id="postalcode"                                  required [(ngModel)]="formPatientregistrationinfo.postalcode"                           name="postalcode">
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                                <label for="town">Town</label>
+                                                                <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.town" name="town">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+
+
+
+
+
+
+
+
+
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Create</button>
+                                            </div>
+                                    </div>
+                                    
+                                </div>
+                  </form>
+                  <button type="submit" class="btn btn-danger" (click)="Close()">Close</button>
+                </div>
+  
+              <!--div class="alert alert-info" *ngIf="viewRegisteredPatients">
+                  <strong>Registered Patients</strong>
+              </div-->
+              
+              <div class="table-responsive" *ngIf="viewRegisteredPatients">
+                    <table id="myTable">
+                      <thead>
+                          <tr>
+                              <th>Patient Name</th>
+                              <th>ID Type</th>
+                              <th>ID Number</th>
+                              <th>DOB</th>
+                              <th>Gender</th>
+                              <th>NHIF No</th>
+                              <th>Town</th>
+                              <th>View</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let registeredpatient of registeredpatientsobj">
+                          <td #firstname [id]="">{{ registeredpatient.firstname }} {{ registeredpatient.middlename }} {{ registeredpatient.lastname }}</td>
+                          <td>{{ registeredpatient.idtype }}</td>
+                          <td>{{ registeredpatient.idnumber }}</td>
+                          <td> {{ registeredpatient.dob }}</td>
+                          <td> {{ registeredpatient.gender }}</td>
+                          <td> {{ registeredpatient.nhifno }}</td>
+                          <td> {{ registeredpatient.town }}</td>
+                          <td> 
+                          <button type="button" #c_patient_id class="btn btn-primary" (click)="Visit(registeredpatient.c_patient_id,registeredpatient.firstname)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">Visit</button>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+  
+  <!---------------------------------------------------viewbookingdetails---------------------------------------------------------------->     
+          <div *ngIf="viewRegisteredPatientDetails">
+  
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <button type="button" #lmis_facilityreport_id class="btn btn-success btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Approve</button>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <button type="button" #lmis_facilityreport_id class="btn btn-success btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Proforma</button>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                              <button type="button" #lmis_facilityreport_id class="btn btn-success btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Submit to KEMSA</button>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <button type="button" #lmis_facilityreport_id class="btn btn-danger btn-block" (click)="uploadFacilityOrder(lmis_facilityreport_id.id)" [id]="facility_order_id" disabled>Reject</button>
+                      </div>
+                  </div>
+              </div>
+  
+              <div>
+  
+                  <div class="alert alert-info">
+                      <strong>Facility Orders in this Booking Period</strong>
+                  </div>
+  
+                  <div class="table-responsive">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th>MFL</th>
+                                  <th>Facility</th>
+                                  <th>Status</th>
+                                  <th>View</th>
+                                  <th>Reject</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let bookingorder of bookingordersobj">
+                                  <td> {{ bookingorder.facilitycode }}</td>
+                                  <td> {{ bookingorder.facility }}</td>
+                                  <td> {{ bookingorder.docstatus }}</td>
+                                  <td> 
+                                  <button type="button" #lmis_facilityreport_id class="btn btn-info" (click)="viewFacilityOrder(lmis_facilityreport_id.id,facilityorders.name)" [id]="bookingorder.lmis_facilityreport_id" [value]="bookingorder.facilityordername">View</button> 
+                                  </td>
+                                  <td>
+                                  <button type="button" #lmis_facilityreport_id class="btn btn-danger" (click)="rejectFacilityOrder(lmis_facilityreport_id.id)" [id]="bookingorder.lmis_facilityreport_id">Reject</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <button type="button" class="btn btn-danger" (click)="closeViewbooking()">Close</button>
+          </div>
+      </div>
+  </div>
