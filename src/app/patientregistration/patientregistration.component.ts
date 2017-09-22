@@ -140,6 +140,7 @@ Dispense(prescriptionid) {
         this.registeredpatientsobj = data;
         console.log(data);
         this.RegisterNew = true;
+        //this.viewForm = true;
       });
       }
 
@@ -160,19 +161,17 @@ Dispense(prescriptionid) {
             this.datetoday = new Date().toLocaleDateString();
             console.log('datetoday' + this.datetoday);
 
-            var d1 = new Date(this.datetoday);
-            var d2 = new Date(this.lastvisitdate);
+            var d1 = new Date(this.datetoday).toLocaleDateString();
+            var d2 = new Date(this.lastvisitdate).toLocaleDateString();
+            console.log(d1 + ' DATES ' + d2);
 
-
-
-
-            if (d2 < d1) {
-              this.ProceedToCreateVisit = 1;
-              this.message = 'Creating patient visit' + this.datetoday + this.lastvisitdate;
-              this.messageclass = 'alert alert-info';
-            } else {
+            if (d2 === d1) {
               this.ProceedToCreateVisit = 0;
-              this.message = 'This patient: ' + firstname + ' '  + middlename + ' ' + lastname + ' - ' + code + 'has a visit today' + data[0].visitno;
+              this.message = 'This patient: ' + firstname + ' '  + middlename + ' ' + lastname + ', Patient No: ' + code + ' has a visit today; Visit No:  ' + data[0].visitno;
+              this.messageclass = 'alert alert-danger';
+            } else {
+              this.ProceedToCreateVisit = 1;
+              this.message = 'Creating patient visit; Last Visit: ' + this.lastvisitdate;
               this.messageclass = 'alert alert-info';
             }
           },
@@ -188,26 +187,27 @@ Dispense(prescriptionid) {
             });
         });
 
-
-        this.createVisit(this.datatopost).subscribe(data => {
-          console.log(data);
-          this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
-            this.registeredpatientsobj = displayRegisteredPatientsRes;
-            console.log(displayRegisteredPatientsRes);
-            this.message = 'A visit has been created for patient: ' + firstname + ' '  + middlename + ' ' + lastname + ' - ' + code ;
-            this.messageclass = 'alert alert-success';
+        if (this.ProceedToCreateVisit === 1) {
+          this.createVisit(this.datatopost).subscribe(data => {
+            console.log(data);
+            this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
+              this.registeredpatientsobj = displayRegisteredPatientsRes;
+              console.log(displayRegisteredPatientsRes);
+              this.message = 'A visit has been created for patient: ' + firstname + ' '  + middlename + ' ' + lastname + ' - ' + code ;
+              this.messageclass = 'alert alert-success';
+            });
+          },
+          error => {
+            console.log('createVisit Error!');
+            console.log(error);
+            this.message = 'Visit NOT created';
+            this.messageclass = 'alert alert-danger';
+            this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
+              this.registeredpatientsobj = displayRegisteredPatientsRes;
+              console.log(displayRegisteredPatientsRes);
+            });
           });
-        },
-        error => {
-          console.log('createVisit Error!');
-          console.log(error);
-          this.message = 'Visit NOT created';
-          this.messageclass = 'alert alert-danger';
-          this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
-            this.registeredpatientsobj = displayRegisteredPatientsRes;
-            console.log(displayRegisteredPatientsRes);
-          });
-        });
+        }
       }
 
       createVisit(datatopost) { // without type info
