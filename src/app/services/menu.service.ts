@@ -13,10 +13,11 @@ export class MenuService {
 
   constructor(private http: Http) {}
 
-  getMenus(): Observable<MenuModel[]> {
+  getMenus(c_user_id: number): Observable<any[]> {
 
     const menus$ = this.http
-      .get(`${this.url}c_menus`)
+      .get(`${this.url}v_usermenus?filter[where][c_user_id]=${c_user_id}`)
+      // .get(`${this.url}v_usermenus`)
       .map(response => response.json());
       return menus$;
   }

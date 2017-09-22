@@ -30,20 +30,20 @@ export class AutoCompleteComponent {
   captain: string;
   dataService: CompleterData;
 
-   constructor(private uService: UniversalService, private completerService: CompleterService) {
-     console.log(this.label);
-   }
+  constructor(
+    private uService: UniversalService, 
+    private completerService: CompleterService
+  ) {}
 
-   ngOnInit() {
-     if(this.minSearchLength === undefined)
+  ngOnInit() {
+    if(this.minSearchLength === undefined)
       this.minSearchLength = 3;
-     this.getData();
-   }
+    this.getData();
+  }
 
-   public selected(selected: any) {
+  public selected(selected: any) {
       if(selected){
         this.emitProduct.emit(selected.originalObject);
-        console.log(this.primarykey + ': ' + selected.originalObject[this.primarykey]);
         this.getData();
       }
    }
