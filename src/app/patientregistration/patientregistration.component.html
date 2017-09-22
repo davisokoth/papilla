@@ -3,7 +3,14 @@
       <div class={{messageclass}}>
           <strong>{{message}}</strong>
       </div>
-  
+      <input (keyup)="searchPatient($event)" id="myInput" title="Type in a name" placeholder="Search for Patient names, code or phone number" *ngIf="search">
+      <!--p>{{mysearch}}</p-->
+      <div *ngIf="RegisterNew"><button type="button" class="btn btn-primary" (click)="FRegisterNew()">New</button></div>
+
+
+
+
+
       <div class="panel panel-default">
           <div class="panel-body">
             <div *ngIf="viewForm">
@@ -22,34 +29,43 @@
                             </div>
                           </div>
                       </div>
-  
+
                       <div class="row">
-                          <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <label for="name">Last Name</label>
+                                        <input type="text" class="form-control" id="lastname"                                  required [(ngModel)]="formPatientregistrationinfo.lastname"                           name="lastname">
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
                               <div class="form-group">
-                                    <label for="name">Last Name</label>
-                                    <input type="text" class="form-control" id="lastname"                                  required [(ngModel)]="formPatientregistrationinfo.lastname"                           name="lastname">
+                                    <label for="dob">Date of birth</label>
+                                    <input type="date" class="form-control"[(ngModel)]="formPatientregistrationinfo.dob" name="dob">
                                 </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label for="dob">Date of birth</label>
-                                  <input type="date" class="form-control"[(ngModel)]="formPatientregistrationinfo.dob" name="dob">
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <button type="submit" class="btn btn-primary">Create</button>
-                              </div>
-                          </div>
-                      </div>
+                            </div>
+                        </div>
+
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <button type="submit" class="btn btn-primary" (click)="SubmitForm()">Create</button>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                            <!--button type="submit" class="btn btn-danger">Close</button-->
+                                        </div>
+                                    </div>
+                                </div>
                   </form>
               </div>
   
-              <div class="alert alert-info" *ngIf="viewRegisteredPatients">
+              <!--div class="alert alert-info" *ngIf="viewRegisteredPatients">
                   <strong>Registered Patients</strong>
-              </div>
+              </div-->
+              
               <div class="table-responsive" *ngIf="viewRegisteredPatients">
-                  <table class="table table-striped">
+                    <table id="myTable">
                       <thead>
                           <tr>
                               <th>Patient Name</th>
@@ -64,15 +80,15 @@
                       </thead>
                       <tbody>
                       <tr *ngFor="let registeredpatient of registeredpatientsobj">
-                          <td contenteditable='true' #firstname [id]="">{{ registeredpatient.firstname }} {{ registeredpatient.middlename }} {{ registeredpatient.lastname }}</td>
-                          <td contenteditable='true'>{{ registeredpatient.idtype }}</td>
-                          <td contenteditable='true'>{{ registeredpatient.idnumber }}</td>
-                          <td contenteditable='true'> {{ registeredpatient.dob }}</td>
-                          <td contenteditable='true'> {{ registeredpatient.gender }}</td>
-                          <td contenteditable='true'> {{ registeredpatient.nhifno }}</td>
-                          <td contenteditable='true'> {{ registeredpatient.town }}</td>
+                          <td #firstname [id]="">{{ registeredpatient.firstname }} {{ registeredpatient.middlename }} {{ registeredpatient.lastname }}</td>
+                          <td>{{ registeredpatient.idtype }}</td>
+                          <td>{{ registeredpatient.idnumber }}</td>
+                          <td> {{ registeredpatient.dob }}</td>
+                          <td> {{ registeredpatient.gender }}</td>
+                          <td> {{ registeredpatient.nhifno }}</td>
+                          <td> {{ registeredpatient.town }}</td>
                           <td> 
-                          <button type="button" #c_patient_id class="btn btn-info" (click)="viewRegisteredPatients(registeredpatient.c_patient_id,registeredpatient.firstname)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">View</button>
+                          <button type="button" #c_patient_id class="btn btn-primary" (click)="Visit(registeredpatient.c_patient_id,registeredpatient.firstname)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">Visit</button>
                           </td>
                       </tr>
                       </tbody>
@@ -130,9 +146,9 @@
                           </thead>
                           <tbody>
                               <tr *ngFor="let bookingorder of bookingordersobj">
-                                  <td contenteditable='true'> {{ bookingorder.facilitycode }}</td>
-                                  <td contenteditable='true'> {{ bookingorder.facility }}</td>
-                                  <td contenteditable='true'> {{ bookingorder.docstatus }}</td>
+                                  <td> {{ bookingorder.facilitycode }}</td>
+                                  <td> {{ bookingorder.facility }}</td>
+                                  <td> {{ bookingorder.docstatus }}</td>
                                   <td> 
                                   <button type="button" #lmis_facilityreport_id class="btn btn-info" (click)="viewFacilityOrder(lmis_facilityreport_id.id,facilityorders.name)" [id]="bookingorder.lmis_facilityreport_id" [value]="bookingorder.facilityordername">View</button> 
                                   </td>
