@@ -9,7 +9,6 @@ import { PatientregistrationComponent } from '../patientregistration/patientregi
 export const DynamicRoutes: Routes = [
   { path: 'dynamic/:c_form_id', component: DynamicComponent },
   { path: 'consultation/:p_visit_id', component: ConsultationComponent },
-  // { path: 'queue', component: QueueComponent },
   { path: 'register', component: PatientregistrationComponent },
   { path: 'queue/:id', component: QueueComponent },
   { path: 'dispensing', component: DispensingComponent },

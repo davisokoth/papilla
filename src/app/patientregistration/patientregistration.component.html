@@ -6,11 +6,6 @@
       <input (keyup)="searchPatient($event)" id="myInput" title="Type in a name" placeholder="Search for Patient names, code or phone number" *ngIf="search">
       <!--p>{{mysearch}}</p-->
       <div *ngIf="RegisterNew"><button type="button" class="btn btn-primary" (click)="FRegisterNew()">New</button></div>
-
-
-
-
-
       <div class="panel panel-default">
           <div class="panel-body">
             <div *ngIf="viewForm">
@@ -184,12 +179,11 @@
               </div-->
               
               <div class="table-responsive" *ngIf="viewRegisteredPatients">
-                    <table id="myTable">
+                    <table id="myTable" class="table table-bordered table-striped">
                       <thead>
                           <tr>
-                              <th>Patient Name</th>
+                              <th>Patient</th>
                               <th>Code</th>
-                              <th>ID Type</th>
                               <th>ID Number</th>
                               <th>NHIF No</th>
                               <th>DOB</th>
@@ -201,13 +195,18 @@
                       <tr *ngFor="let registeredpatient of registeredpatientsobj">
                           <td #firstname [id]="">{{ registeredpatient.firstname }} {{ registeredpatient.middlename }} {{ registeredpatient.lastname }}</td>
                           <td>{{ registeredpatient.code }}</td>
-                          <td>{{ registeredpatient.idtype }}</td>
                           <td>{{ registeredpatient.idnumber }}</td>
                           <td> {{ registeredpatient.nhifno }}</td>
                           <td> {{ registeredpatient.dob }}</td>
                           <td> {{ registeredpatient.gender }}</td>
                           <td> 
-                          <button type="button" #c_patient_id class="btn btn-primary" (click)="Visit(registeredpatient.c_patient_id, registeredpatient.firstname, registeredpatient.middlename, registeredpatient.lastname, registeredpatient.code)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">Visit</button>
+                            <button 
+                                #c_patient_id 
+                                class="btn btn-primary" 
+                                (click)="Visit(registeredpatient.c_patient_id, registeredpatient.firstname, registeredpatient.middlename, registeredpatient.lastname, registeredpatient.code)" 
+                                [name]="registeredpatient.firstname" 
+                                [id]="registeredpatient.c_patient_id"
+                            >Visit</button>
                           </td>
                       </tr>
                       </tbody>
