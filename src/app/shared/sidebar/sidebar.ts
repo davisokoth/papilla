@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuModel } from '../../models/menu';
@@ -10,7 +10,7 @@ import { MenuService } from '../../services/menu.service';
   styleUrls: [ 'sidebar.css' ]
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
   menus: MenuModel[] = [];
   orgmenus: MenuModel[] = [];
@@ -24,6 +24,10 @@ export class SidebarComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    
+  }
+
+  ngOnInit() {
     this.getMenus();
   }
 
@@ -40,7 +44,8 @@ export class SidebarComponent {
   }
 
   getMenus() {
-    this.menuService.getMenus().subscribe(
+    let user = JSON.parse(localStorage.getItem('user'))[0];
+    this.menuService.getMenus(user.c_user_id).subscribe(
       data => {
         this.orgmenus = data;
         for (let menu of this.orgmenus) {
@@ -55,7 +60,10 @@ export class SidebarComponent {
           }
         }
       },
-      err => { this.error = true; }
+      err => { 
+        this.error = true; 
+        console.log(err);
+      }
     );
   }
 
@@ -65,7 +73,7 @@ export class SidebarComponent {
     }
     if (menu.action === 'activity') {
       // this.router.navigate([`/dashboard/queue`]);
-      this.router.navigate([menu.url]);
+      this.router.navigate([menu.url, menu.record_id]);
     }
     if (menu.action === 'custom') {
       // this.router.navigate([`/dashboard/queue`]);
