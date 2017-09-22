@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {CashierserviceService} from '../services/cashierservice.service';
+import { CashierserviceService} from '../services/cashierservice.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Http,Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
+import { URL } from '../globals';
 
 @Component({
   selector: 'app-selectedbill',
@@ -11,7 +12,7 @@ import {Http,Response} from '@angular/http';
 
 export class SelectedbillComponent implements OnInit {
 
-  private myurl="http://197.248.10.20:3000/api/b_paymodes";
+  private myurl="b_paymodes";
   data = [];
   myarr=[];
   error:string="";
@@ -29,70 +30,47 @@ export class SelectedbillComponent implements OnInit {
   name:string;
 
   constructor(private cashService: CashierserviceService, private http:Http,private route: ActivatedRoute,
-    private router: Router) {
-
-   this.getPlaces();
-
-   }
+    private router: Router) {}
 
   ngOnInit() {
     console.log(this.item);
     this.returnUrl = '/dashboard/cashier';
-
+    this.getPlaces();
   }
 
   getPaymentValue(){
-
-  return this.paymentmethod;
-
+    return this.paymentmethod;
   }
 
-
   getData(){
-
-  return this.http.get(this.myurl).map((res:Response)=>res.json())
+    return this.http.get(this.myurl).map((res:Response)=>res.json())
   }
 
   getPlaces(){
-
-  this.getData().subscribe(data=>{
-
-  this.data=data
-  })
+    this.getData().subscribe(data=>{
+      this.data=data;
+    });
   }
 
-payBill(){
+  payBill(){
+    this.getPaymentValue();
+    console.log(this.item);
+    var myitems=this.item;
+    var totalValue=0;
 
- this.getPaymentValue();
- console.log(this.item);
- var myitems=this.item;
- var totalValue=0;
+    for (var j = 0; j < myitems.length; j++){
+      totalValue=totalValue+(Number(myitems[j].amount));
+      console.log(myitems[j].amount);
+    }
 
- for (var j = 0; j < myitems.length; j++){
- totalValue=totalValue+(Number(myitems[j].amount));
-  console.log(myitems[j].amount);
-}
-
-console.log(totalValue);
-console.log(this.amount);
-
-
-if(this.amount<totalValue){
-
-   this.checkAmount();
-
-
-}
-else if(this.getPaymentValue()==""){
-  
-  alert("please choose payment method");
-}
-else{
-
-
-  console.log("document no:"+this.item[0].documentno+" patient id "+this.item[0].c_patient_id);
-  
-  let jsonObj = {
+    if(this.amount<totalValue){
+      this.checkAmount();
+    }
+    else if(this.getPaymentValue()==''){
+      alert('Please choose the payment method');
+    }
+    else{
+      let jsonObj = {
         'createdby':1,
         'updatedby':1,
         'documentno': 1,
@@ -103,72 +81,38 @@ else{
         'b_billing_id':this.item[0].b_billing_id,
         'ispayed': 'Y'
       }
-    this.cashService.postPayment(JSON.stringify(jsonObj))
-    .subscribe(
-      data => {
-        console.log(data);
-        this.isNotPaid = false;
-
-
-        this.error="";
-        this.amount=0;
-        this.paymentmethod=2;
-        
-        this.cashService.updateBill(this.item[0].b_billing_id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.item[0].ispayed = 'Y';
-
-
-        this.router.navigate([this.returnUrl]);
-
-
-
-      },
-      error => {
-        alert('An error has occured updating bill');
-        console.log('error ocured updating bill');
-        
-      }
-    );
-
-
-
-      },
-      error => {
-        alert('An error has occured!');
-        console.log(error);
-        console.log(jsonObj);
-      }
-    ); 
-
-
-
-
-    
-    this.print();
-
-      this.cashService.getBills().subscribe(
-      data => {
-
-          this.myarr = data;
-          console.log(this.myarr);
-          
+      this.cashService.postPayment(JSON.stringify(jsonObj))
+      .subscribe(
+        data => {
+          console.log(data);
+          this.isNotPaid = false;
+          this.cashService.updateBill(this.item[0].b_billing_id)
+            .subscribe(
+              data => {
+                console.log(data);
+                this.item[0].ispayed = 'Y';
+                this.router.navigate([this.returnUrl]);
+              },
+              error => {
+                alert('An error has occured updating bill');
+              }
+            );
+        },
+        error => {
+          alert('An error has occured!');
         }
-    );
+      ); 
 
+      this.print();
+        this.cashService.getBills().subscribe(
+        data => {
+            this.myarr = data;
+          }
+      );
+    }
+  }
 
-}
-
-
-}
-
-
-refresh(): void {
-       
-
-}
+  refresh(): void {}
 
 
 checkAmount(){
@@ -210,7 +154,7 @@ mybalance=this.amount-totalValue;
     balance=mybalance;    
     theCustomer=custName;
 
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=auto,width=auto');
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=auto,width=200');
     popupWin.document.open();
     popupWin.document.write(`
       <html>
@@ -220,19 +164,18 @@ mybalance=this.amount-totalValue;
           
           </style>
         </head>
-    <body onload="window.print();window.close()">
-    <p>CUSTOMER: ${theCustomer}</p>
-    <p>TOTAL AMOUNT: ${amount}</p>
-    <p>AMOUNT PAID: ${payedValue}</p>
-    <p>BALANCE: ${balance}</p>
+        <body onload="window.print();window.close()">
+          <h4>${theCustomer}</h4>
 
-    </body>
+          <p>TOTAL AMOUNT: ${amount}</p>
+          <p>AMOUNT PAID: ${payedValue}</p>
+          <p>BALANCE: ${balance}</p>
+
+        </body>
       </html>`
     );
     popupWin.document.close();
-
- 
-}
+  }
 
 
 }
