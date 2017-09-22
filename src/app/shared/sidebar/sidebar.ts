@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit{
 
   launchAction(menu: MenuModel) {
     if (menu.action === 'form') {
-      this.router.navigate([`/dashboard/dynamic/${menu.c_form_id}`]);
+      this.router.navigate([menu.url]);
     }
     if (menu.action === 'activity') {
       // this.router.navigate([`/dashboard/queue`]);
@@ -78,9 +78,6 @@ export class SidebarComponent implements OnInit{
     if (menu.action === 'custom') {
       // this.router.navigate([`/dashboard/queue`]);
       this.router.navigate([menu.url]);
-    }
-    if (menu.action === 'cashier') {
-      this.router.navigate([`/dashboard/cashier`]);
     }
   }
 }
