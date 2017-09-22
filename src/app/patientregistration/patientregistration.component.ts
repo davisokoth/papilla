@@ -16,6 +16,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class PatientregistrationComponent implements OnInit {
+  NewPatient: any;
+  datatopost: any;
   RegisteredPatients: any;
   search: any;
   RegisterNew: any;
@@ -62,7 +64,7 @@ export class PatientregistrationComponent implements OnInit {
 
     if ( how === 2) {
       this.RegisteredPatients = this.http
-      .post(this.url + 'c_patients/search?filter[order]=firstname ASC', {code: fncdata, phoneno: fncdata, lastname: fncdata})
+      .post(this.url + 'c_patients/search', {code: fncdata, phoneno: fncdata, lastname: fncdata})
       .map(response => response.json());
     }
     return this.RegisteredPatients;
@@ -134,114 +136,78 @@ Dispense(prescriptionid){
         console.log(data);
         this.RegisterNew = true;
       });
-      }  
-      
+      }
+
       Visit(c_patient_id, firstname) {
         alert('A visit has been created for patient ' + firstname + ': ' + c_patient_id);
-        this.displayRegisteredPatients(1, 'nothing').subscribe(data=>{
+        this.displayRegisteredPatients(1, 'nothing').subscribe(data => {
           this.registeredpatientsobj = data;
           console.log(data);
           this.RegisterNew = false;
         });
-        //this.router.navigate([this.returnUrl]);
+        // this.router.navigate([this.returnUrl]);
       }
       FRegisterNew() {
         this.viewForm = true;
         this.RegisterNew = false;
         this.search = false;
         this.viewRegisteredPatients = false;
-        //alert('New patient' + this.RegisterNew);
+        // alert('New patient' + this.RegisterNew);
       }
 
       SubmitForm() {
-        var curDate = new Date();
-        curDate.setHours(0,0,0,0);
-    
-        console.log("curDate");
-        console.log(curDate);
-        
-        console.log("startdate");
-        console.log(this.formPatientregistrationinfo.startdate);
-    
-        console.log("enddate");
-        console.log(this.formPatientregistrationinfo.enddate);
-    
-        var add_day_to_enddate = new Date(this.formPatientregistrationinfo.enddate);
-        add_day_to_enddate.setDate(add_day_to_enddate.getDate()+1);
-        
-        console.log("add_day_to_enddate");
-        console.log(add_day_to_enddate);
-        
-        console.log("name");
-        console.log(this.formPatientregistrationinfo.name);
-    
-        console.log("productcategory");
-        console.log(this.formPatientregistrationinfo.productcategory);
-        
-    
-        if(this.formPatientregistrationinfo.name == null){
-          this.message ="Booking name cannot be blank"
-          this.messageclass = "alert alert-danger"
-          console.log(this.messageclass);
-          return false;
-        }
-    
-        if(this.formPatientregistrationinfo.productcategory == null){
-          this.message ="Product Category cannot be blank"
-          this.messageclass = "alert alert-danger"
-          console.log(this.messageclass);
-          return false;
-        }
-        
-        
-        if(this.formPatientregistrationinfo.startdate== null){
-          this.message ="Start date cannot be blank"
-          this.messageclass = "alert alert-danger"
-          console.log(this.messageclass);
-          return false;
-        }
-    
-        if(this.formPatientregistrationinfo.enddate == null){
-          this.message ="End date cannot be blank"
-          this.messageclass = "alert alert-danger"
-          console.log(this.messageclass);
-          return false;
-        }
-    
-        if(new Date(this.formPatientregistrationinfo.startdate) > new Date(this.formPatientregistrationinfo.enddate)){
-          this.message ="End date: Should come after start date"
-          this.messageclass = "alert alert-danger"   
-          console.log(this.messageclass);
-          return false;
-        }
-        if(new Date(this.formPatientregistrationinfo.startdate) < curDate){
-          this.message ="Start date: Should be today or a future date."
-          this.messageclass = "alert alert-danger"  
-          console.log(this.messageclass);
-            return false;
-        }
-          this.bookingService.createBooking(
-          this.formPatientregistrationinfo.name, this.formPatientregistrationinfo.productcategory, this.formPatientregistrationinfo.startdate, add_day_to_enddate, this.atl_county_id).subscribe(data => {
-            this.message ="Success! Booking Created"
-            this.messageclass = "alert alert-success"
-            this.formPatientregistrationinfo.name = "";
-            this.formPatientregistrationinfo.startdate = "";
-            this.formPatientregistrationinfo.enddate = "";
-            this.formPatientregistrationinfo.productcategory = "";
-            this.displayBookings();
-            
-            //this.router.navigate([this.returnUrl]);        
-        },
+        this.datatopost = { firstname: this.formPatientregistrationinfo.firstname,
+        lastname: this.formPatientregistrationinfo.lastname,
+        middlename: this.formPatientregistrationinfo.middlename,
+        idtype: this.formPatientregistrationinfo.idtype,
+        idnumber: this.formPatientregistrationinfo.idnumber,
+        gender: this.formPatientregistrationinfo.gender,
+        maritalstatus: this.formPatientregistrationinfo.maritalstatus,
+        dob: this.formPatientregistrationinfo.dob,
+        email: this.formPatientregistrationinfo.email,
+        c_facility_id: this.user[0].c_facility_id,
+        c_location_id: this.formPatientregistrationinfo.c_location_id,
+        nhifno: this.formPatientregistrationinfo.nhifno,
+        occupation: this.formPatientregistrationinfo.occupation,
+        phoneno: this.formPatientregistrationinfo.phoneno,
+        phoneno2: this.formPatientregistrationinfo.phoneno2,
+        physicaladdress: this.formPatientregistrationinfo.physicaladdress,
+        postaladdress: this.formPatientregistrationinfo.postaladdress,
+        postalcode: this.formPatientregistrationinfo.postalcode,
+        town: this.formPatientregistrationinfo.town,
+        createdby: this.user[0].c_facility_id,
+        updatedby: this.user[0].c_facility_id
+      };
+
+          this.createPatient(this.datatopost).subscribe(data => {
+              this.message ='Success! Patient Created'
+              this.messageclass = 'alert alert-success'
+              this.viewRegisteredPatients = true;
+              this.viewRegisteredPatientDetails = false;
+              this.viewForm = false;
+              this.RegisterNew = false;
+              this.search = true;
+              this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
+                this.registeredpatientsobj = displayRegisteredPatientsRes;
+                console.log(displayRegisteredPatientsRes);
+            });
+          },
           error => {
-            console.log('createBooking Error!');
-            console.log(error);
-            this.message ="Booking NOT created"
-            this.messageclass = "alert alert-danger"
-            this.displayBookings();
-          }); 
+              console.log('createPatient Error!');
+              console.log(error);
+              this.message ='Patient NOT created'
+              this.messageclass = 'alert alert-danger'
+              this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
+                this.registeredpatientsobj = displayRegisteredPatientsRes;
+                console.log(displayRegisteredPatientsRes);
+              });
+            });
         }
-    
 
-
-
+  createPatient(datatopost) { // without type info
+    this.NewPatient = this.http
+    .post(this.url + 'c_patients', datatopost)
+    .map(response => response.json());
+    return this.NewPatient;
+  }
 }

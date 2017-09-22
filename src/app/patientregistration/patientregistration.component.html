@@ -14,7 +14,7 @@
       <div class="panel panel-default">
           <div class="panel-body">
             <div *ngIf="viewForm">
-                    <form (ngSubmit)="submitBookingForm()" #f="ngForm" novalidate>
+                    <form (ngSubmit)="SubmitForm()" #f="ngForm" novalidate>
                       <div class="row">
                           <div class="col-md-6">
                               <div class="form-group">
@@ -45,10 +45,132 @@
                             </div>
                         </div>
 
+
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="idtype">ID Type</label>
+                                            <input type="text" class="form-control" id="idtype"                                  required [(ngModel)]="formPatientregistrationinfo.idtype"                           name="idtype">
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                        <label for="idnumber">ID Number</label>
+                                        <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.idnumber" name="idnumber">
+                                    </div>
+                                </div>
+                            </div>
+    
+
                             <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                                <button type="submit" class="btn btn-primary" (click)="SubmitForm()">Create</button>
+                                                <label for="gender">Gender</label>
+                                                <input type="text" class="form-control" id="gender"                                  required [(ngModel)]="formPatientregistrationinfo.gender"                           name="gender">
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                            <label for="maritalstatus">Marital Status</label>
+                                            <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.maritalstatus" name="maritalstatus">
+                                        </div>
+                                    </div>
+                                </div>
+    
+
+                                <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="text" class="form-control" id="email"                                  required [(ngModel)]="formPatientregistrationinfo.email"                           name="email">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                                <label for="c_location_id">Location</label>
+                                                <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.c_location_id" name="c_location_id">
+                                            </div>
+                                        </div>
+                                    </div>
+    
+
+                                    <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="nhifno">NHIF No.</label>
+                                                        <input type="text" class="form-control" id="nhifno"                                  required [(ngModel)]="formPatientregistrationinfo.email"                           name="nhifno">
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                    <label for="occupation">Occupation</label>
+                                                    <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.occupation" name="occupation">
+                                                </div>
+                                            </div>
+                                        </div>
+    
+
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                            <label for="nhifno">Phone No</label>
+                                                            <input type="text" class="form-control" id="phoneno"                                  required [(ngModel)]="formPatientregistrationinfo.email"                           name="phoneno">
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                        <label for="phoneno2">Phone No 2</label>
+                                                        <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.phoneno2" name="phoneno2">
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+
+
+                                            <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                                <label for="physicaladdress">Physical Address</label>
+                                                                <input type="text" class="form-control" id="physicaladdress"                                  required [(ngModel)]="formPatientregistrationinfo.physicaladdress"                           name="physicaladdress">
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                      <div class="form-group">
+                                                            <label for="postaladdress">Postal Address</label>
+                                                            <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.postaladdress" name="postaladdress">
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+
+                                                <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                    <label for="postalcode">Postal Code</label>
+                                                                    <input type="text" class="form-control" id="postalcode"                                  required [(ngModel)]="formPatientregistrationinfo.postalcode"                           name="postalcode">
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <div class="form-group">
+                                                                <label for="town">Town</label>
+                                                                <input type="text" class="form-control"[(ngModel)]="formPatientregistrationinfo.town" name="town">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+
+
+
+
+
+
+
+
+
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Create</button>
                                             </div>
                                     </div>
                                     <div class="col-md-6">
