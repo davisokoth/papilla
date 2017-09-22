@@ -204,10 +204,21 @@ Dispense(prescriptionid){
             });
         }
 
-  createPatient(datatopost) { // without type info
-    this.NewPatient = this.http
-    .post(this.url + 'c_patients', datatopost)
-    .map(response => response.json());
-    return this.NewPatient;
-  }
+    createPatient(datatopost) { // without type info
+      this.NewPatient = this.http
+      .post(this.url + 'c_patients', datatopost)
+      .map(response => response.json());
+      return this.NewPatient;
+    }
+    Close() {
+      this.viewRegisteredPatients = true;
+      this.viewRegisteredPatientDetails = false;
+      this.viewForm = false;
+      this.RegisterNew = false;
+      this.search = true;
+      this.displayRegisteredPatients(1, 'nothing').subscribe( displayRegisteredPatientsRes => {
+        this.registeredpatientsobj = displayRegisteredPatientsRes;
+        console.log(displayRegisteredPatientsRes);
+    });
+}
 }
