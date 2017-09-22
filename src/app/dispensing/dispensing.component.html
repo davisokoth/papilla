@@ -1,18 +1,11 @@
 <div class="{{messageclass}}"><strong>{{message}}</strong></div>
 
-<div class="table-responsive"><!-- *ngIf="viewBookings"-->
+<div class="table-responsive">
   <table class="table table-striped">
       <thead>
           <tr>
-              <th>Pharmacy Name</th>
-              <th>Visit No</th>
-              <th>Patient Name</th>
-              <th>Product Name</th>
-              <th>Dosage</th>
-              <th>Qty On Hand</th>
-              <th>Qty to Dispense</th>
-              <th>Dispensed</th>
-              <th>Action</th>
+              <th>Pharmacy</th><th>Visit</th><th>Patient</th><th>Product</th><th>Dosage</th><th>On Hand</th>
+              <th>Qty to Dispense</th><th></th>
             </tr>
       </thead>
       <tbody>
@@ -26,8 +19,11 @@
           <td contenteditable='true'> {{ prescription.dispenseqty }}</td>
           <td contenteditable='true'> {{ prescription.dispensed }}</td>
           <td> 
-            <button type="button" #prescriptionid class="btn btn-primary" (click)="Dispense(prescription.prescriptionid)" [id]="prescription.prescriptionid">Dispense</button>
-            </td>
+            <button type="button" #prescriptionid class="btn btn-primary" 
+                (click)="Dispense(prescription.prescriptionid)" [id]="prescription.prescriptionid">
+                <i class="fa fa-check"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
   </table>

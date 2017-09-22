@@ -17,11 +17,13 @@ local: string;
   constructor(private mycashierservice:CashierserviceService) { 
     this.mycashierservice.getBills().subscribe(
       data => {
+
           this.myarr = data;
           console.log(this.myarr);
           this.test = true;
           this.local = 'Me here';
           console.log(this.local);
+          
         }
     );
   }
@@ -33,7 +35,6 @@ local: string;
     this.mycashierservice.getBillDetails(b_billing_id).subscribe(
       data => {
           this.itemx = data;
-          console.log(this.itemx);
         }
     );
   }

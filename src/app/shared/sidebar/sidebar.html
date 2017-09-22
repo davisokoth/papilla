@@ -9,13 +9,13 @@
 				data-toggle="collapse" 
 				[attr.data-target]="'#menu-' + menu.c_menu_id"
 			>
-				<i class="fa fa-plus"></i> &nbsp; {{menu.name}}
+				<i class="fa fa-plus"></i> &nbsp; {{menu.menu}}
 			</a>
 			<div id="menu-{{menu.c_menu_id}}" class="collapse">
 				<ul class="submenu">
 					<li *ngFor="let menuitem of menu.navitems">
 						<a class="navitem" (click)="launchAction(menuitem)">
-							<i class="fa fa-fw fa-{{menuitem.icon}}"></i> &nbsp; {{menuitem.name}}
+							<i class="fa fa-fw fa-{{menuitem.icon}}"></i> &nbsp; {{menuitem.menu}}
 						</a>
 					</li>
 				</ul>
