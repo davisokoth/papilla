@@ -188,26 +188,26 @@
                       <thead>
                           <tr>
                               <th>Patient Name</th>
+                              <th>Code</th>
                               <th>ID Type</th>
                               <th>ID Number</th>
+                              <th>NHIF No</th>
                               <th>DOB</th>
                               <th>Gender</th>
-                              <th>NHIF No</th>
-                              <th>Town</th>
-                              <th>View</th>
+                              <th>Action</th>
                           </tr>
                       </thead>
                       <tbody>
                       <tr *ngFor="let registeredpatient of registeredpatientsobj">
                           <td #firstname [id]="">{{ registeredpatient.firstname }} {{ registeredpatient.middlename }} {{ registeredpatient.lastname }}</td>
+                          <td>{{ registeredpatient.code }}</td>
                           <td>{{ registeredpatient.idtype }}</td>
                           <td>{{ registeredpatient.idnumber }}</td>
+                          <td> {{ registeredpatient.nhifno }}</td>
                           <td> {{ registeredpatient.dob }}</td>
                           <td> {{ registeredpatient.gender }}</td>
-                          <td> {{ registeredpatient.nhifno }}</td>
-                          <td> {{ registeredpatient.town }}</td>
                           <td> 
-                          <button type="button" #c_patient_id class="btn btn-primary" (click)="Visit(registeredpatient.c_patient_id,registeredpatient.firstname)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">Visit</button>
+                          <button type="button" #c_patient_id class="btn btn-primary" (click)="Visit(registeredpatient.c_patient_id, registeredpatient.firstname, registeredpatient.middlename, registeredpatient.lastname, registeredpatient.code)" [name]="registeredpatient.firstname" [id]="registeredpatient.c_patient_id">Visit</button>
                           </td>
                       </tr>
                       </tbody>
