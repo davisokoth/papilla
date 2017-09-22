@@ -167,7 +167,7 @@ Dispense(prescriptionid) {
 
             if (d2 === d1) {
               this.ProceedToCreateVisit = 0;
-              this.message = 'This patient: ' + firstname + ' '  + middlename + ' ' + lastname + ', Patient No: ' + code + ' has a visit today; Visit No:  ' + data[0].visitno;
+              this.message = 'This patient: ' + firstname + ' '  + middlename + ' ' + lastname + ', Patient No: ' + code + ', has a visit today; Visit No:  ' + data[0].visitno;
               this.messageclass = 'alert alert-danger';
             } else {
               this.ProceedToCreateVisit = 1;
