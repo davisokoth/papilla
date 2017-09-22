@@ -5,12 +5,21 @@
 		<div class="col-lg-6 col-md-6">{{x.product}}</div>
 		<div class="col-lg-6 col-md-6">{{x.amount}}</div>
 	</div>
-	<input [(ngModel)]="amount" name="amount" type="number">
-	<div *ngIf="isNotPaid; else paidTemplate">
-		<button (click)="payBill()">Pay</button>
+	<div style="margin-top: 10px;margin-bottom: 10px">
+		<form>
+			<input [(ngModel)]="amount" name="amount" type="number">
+			<select [(ngModel)]="paymentmethod" name="paymentmethod">
+				
+				<option *ngFor="let contacts of data" value="{{contacts.b_paymode_id}}">
+					{{contacts.name}}
+				</option>
+				
+			</select>
+			<div>
+				<button (click)="payBill()">Pay</button>
+			</div>
+		</form>
 	</div>
 
-	<ng-template #paidTemplate>
-		<button (click)="print('kennedy')">Print</button>
-	</ng-template>
+	
 </md-card>

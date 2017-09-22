@@ -13,7 +13,7 @@ export class CashierserviceService {
   getBills(): Observable<any[]> {
 
     const bills$ = this.http
-      .get(`${this.url}v_billings`)
+      .get(`${this.url}v_billings?filter[where][ispayed]=N`)
       .map(response => response.json());
       return bills$;
   }
@@ -37,5 +37,22 @@ export class CashierserviceService {
       
     });
   }
+
+  updateBill(b_billing_id) {
+    let putdata = {
+        'ispayed':'Y',
+      }
+    return this.http.put(this.url+'b_billings/'+b_billing_id, putdata, {
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .map((res: any) => {
+      const data = res.json();
+      
+    });
+  }
+
+
 
 }
