@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {CashierserviceService} from '../services/cashierservice.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import {Http,Response} from '@angular/http';
 
 @Component({
@@ -14,14 +15,20 @@ export class SelectedbillComponent implements OnInit {
   data = [];
   myarr=[];
 
+  test = false;
+  itemx: any[];
+  local: string;
+  returnUrl: string;
+
   @Input() item: any[];
   amount: number=0;
-  paymentmethod:any;
+  paymentmethod:any=2;
   isNotPaid = true;
   isNotPrinted = true; 
   name:string;
 
-  constructor(private cashService: CashierserviceService, private http:Http) {
+  constructor(private cashService: CashierserviceService, private http:Http,private route: ActivatedRoute,
+    private router: Router) {
 
    this.getPlaces();
 
@@ -29,6 +36,7 @@ export class SelectedbillComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.item);
+    this.returnUrl = '/dashboard/cashier';
 
   }
 
@@ -106,6 +114,12 @@ else{
       data => {
         console.log(data);
         this.item[0].ispayed = 'Y';
+
+
+        this.router.navigate([this.returnUrl]);
+
+
+
       },
       error => {
         alert('An error has occured updating bill');

@@ -23,6 +23,7 @@ local: string;
           this.test = true;
           this.local = 'Me here';
           console.log(this.local);
+          
         }
     );
   }
