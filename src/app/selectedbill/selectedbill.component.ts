@@ -14,6 +14,7 @@ export class SelectedbillComponent implements OnInit {
   private myurl="http://197.248.10.20:3000/api/b_paymodes";
   data = [];
   myarr=[];
+  error:string="";
 
   test = false;
   itemx: any[];
@@ -109,6 +110,10 @@ else{
         this.isNotPaid = false;
 
 
+        this.error="";
+        this.amount=0;
+        this.paymentmethod=2;
+        
         this.cashService.updateBill(this.item[0].b_billing_id)
     .subscribe(
       data => {
@@ -169,7 +174,8 @@ refresh(): void {
 checkAmount(){
 
   console.log("Make full Payment to proceed");
-  alert("Make full Payment to proceed");
+  //alert("Make full Payment to proceed");
+  this.error="make full payment to proceed";
 
 }
 
