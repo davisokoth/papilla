@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-// import {Observable} from 'rxjs/Observable';
-// import { Http, Headers, Response } from '@angular/http';
 import { Http } from '@angular/http';
 import {URL} from '../globals';
 import 'rxjs/add/operator/map';
+import * as moment from 'moment';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
@@ -16,6 +15,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class PatientregistrationComponent implements OnInit {
+
   lastvisitdate: any;
   datetoday: any;
   ProceedToCreateVisit: any;
@@ -313,5 +313,9 @@ Dispense(prescriptionid) {
         this.registeredpatientsobj = displayRegisteredPatientsRes;
         console.log(displayRegisteredPatientsRes);
     });
+  }
+
+  formatDate(date: string) {
+    return moment(date).format('MMM. d, YYYY');
   }
 }
