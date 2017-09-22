@@ -23,16 +23,15 @@ export class ConsultationComponent implements OnInit {
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
     private visitService: VisitService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.p_visit_id = this.route.snapshot.params['p_visit_id'];
-    console.log("Visit: " + this.p_visit_id);
     this.visitService.getVisit(this.p_visit_id).subscribe(
       data => {
         this.patient = data[0];
-        console.log(this.patient);
         this.getHistory();
       },
       error => {
@@ -59,6 +58,16 @@ export class ConsultationComponent implements OnInit {
     this.visitService.getVisits(this.patient.c_patient_id).subscribe(
       data => {
         this.visits = data;
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  closeCase() {
+    this.visitService.setVisitStatus(this.p_visit_id, 'CO').subscribe(
+      data => {
+        this.router.navigate(['/dashboard/queue', 2]);
       },
       error => {
         console.log(error);
