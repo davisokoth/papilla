@@ -15,6 +15,7 @@ export class SelectedbillComponent implements OnInit {
   private myurl="b_paymodes";
   data = [];
   myarr=[];
+  error:string="";
 
   test = false;
   itemx: any[];
@@ -117,7 +118,8 @@ export class SelectedbillComponent implements OnInit {
 checkAmount(){
 
   console.log("Make full Payment to proceed");
-  alert("Make full Payment to proceed");
+  //alert("Make full Payment to proceed");
+  this.error="make full payment to proceed";
 
 }
 
